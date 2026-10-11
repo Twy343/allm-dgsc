@@ -1,6 +1,7 @@
 # Experiment 1: Semantic Causal Interventions
 
-Status: planned; no experiment code implemented.
+Status: core probability-swap hook and downstream log-probability metric
+implemented; checkpoint-backed cases and controls remain pending.
 
 Change a selected probability row `P_t[i, :]` by exchanging probability mass
 between an observed intermediate token `v` and a counterfactual `v_prime`.
@@ -22,3 +23,6 @@ canvas at the intervention boundary unchanged. Preserve row normalization.
 
 Case location: `datasets/semantic_intervention/`.
 Shared prerequisites: `docs/PROPOSAL_PLAN.md`.
+
+Implementation: `intervention.py` and `metrics.py`. Use `SemanticSwap` as the
+`intervention` argument to `exp_code.common.dg_runner.run_fixed_trajectory`.

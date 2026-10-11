@@ -1,7 +1,7 @@
 # Proposal Implementation Plan
 
 Source: `DiffusionGemma_Final_Project_Proposal.docx` in this directory.
-This document describes planned work. None of the items below is implemented.
+This document tracks planned work and the first implemented infrastructure.
 
 ## Shared Prerequisites
 
@@ -19,8 +19,8 @@ Before the three main experiments:
 - Disable or standardize adaptive early stopping for comparable trajectories.
 - Record prompt, case ID, seed, checkpoint, tokenizer, temperature schedule,
   sampler settings, intervention step, and intervention positions.
-- Add shared tracing and intervention helpers only when their interfaces are
-  established by the first runnable experiment.
+- Shared fixed-step tracing, SC modes, and intervention helpers are implemented
+  under `exp_code/common/`; checkpoint-backed validation remains pending.
 
 ## Experiment Mapping
 

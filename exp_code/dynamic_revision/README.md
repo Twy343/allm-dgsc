@@ -1,6 +1,7 @@
 # Experiment 3: Revision Under Changing Context
 
-Status: planned; no experiment code implemented.
+Status: completed-canvas restart wrapper and token-level revision metrics
+implemented; prompt/KV recomputation and checkpoint-backed cases remain pending.
 
 Converge a canvas under initial context `x_0`, change the premise or external state
 to `x_1`, and reopen the completed canvas for denoising under the updated context.
@@ -26,3 +27,6 @@ change. Track whether SC reorganizes before or alongside visible edits.
 
 Case location: `datasets/dynamic_revision/`.
 Shared prerequisites: `docs/PROPOSAL_PLAN.md`.
+
+Implementation: `runner.py` and `metrics.py`. The runner accepts a cache already
+recomputed for `x_1`; context construction belongs in the future model CLI.

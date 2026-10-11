@@ -5,8 +5,8 @@ Causal Probing and Editable Reasoning in DiffusionGemma.
 Research scaffold for the Algorithms in Large Language Models final project.
 Scope: inference-time experiments only; no training or fine-tuning.
 
-**Status:** upstream source imported; experiments and datasets are not yet
-implemented. There are no experiment runners, generated cases, or results.
+**Status:** upstream source imported and the first experiment infrastructure is
+implemented. No checkpoint-backed run, generated case, or result is committed.
 
 ## Layout
 
@@ -28,9 +28,10 @@ allm-dgsc/
     DiffusionGemma_Final_Project_Proposal.docx
 ```
 
-Each experiment directory contains only a planning README. Dataset directories
-contain only Git placeholders. Actual implementation starts after baseline
-inference and per-step tracing are verified.
+`exp_code/common/` now provides a fixed-step trajectory runner, compact tracing,
+and full/disabled/top-k/threshold SC modes. The three experiment directories
+contain their first intervention or evaluation operators. Dataset directories
+remain empty placeholders until controlled cases are selected.
 
 ## Experiments
 
@@ -66,3 +67,15 @@ There are no downloaded benchmarks or fabricated experiment results.
 
 Future runtime outputs belong in `outputs/`, which is ignored by Git. Keep model
 weights, caches, and large tensors out of the repository.
+
+## Development Check
+
+Run the lightweight tests without model weights:
+
+```powershell
+python -m unittest discover -s exp_code/tests -v
+```
+
+End-to-end runs require the upstream dependencies under `dg/`, an accepted
+DiffusionGemma checkpoint license, sufficient accelerator memory, and a locally
+available checkpoint. Those environment-specific steps are not yet configured.
