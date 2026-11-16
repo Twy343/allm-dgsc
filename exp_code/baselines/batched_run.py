@@ -33,7 +33,7 @@ def main():
   parser.add_argument('--data-root',type=Path,required=True)
   parser.add_argument('--checkpoint',type=Path)
   parser.add_argument('--output',type=Path,required=True)
-  parser.add_argument('--batch-size',type=int,choices=(1,2,4,8),default=4)
+  parser.add_argument('--batch-size',type=int,choices=(1,2,4,8,16),default=4)
   parser.add_argument('--model-shards',type=int,choices=(1,2),default=1)
   parser.add_argument('--max-batches',type=int,
                       help='Optional invocation limit; save valid partial results for resume')
@@ -68,7 +68,7 @@ def main():
     evaluate(args,plans)
 
 
-def evaluate(args,plans):
+def evaluate(args,plans,loaded_model=None):
   invocation_started=time.monotonic()
   import dialog
   import jax
@@ -110,9 +110,10 @@ def evaluate(args,plans):
       if not (args.output/row['entropy_file']).is_file():
         raise ValueError('Missing entropy for recorded prediction')
       done.add((row['task'],row['mode'],row['case_id']))
-  print('CHECKPOINT_LOAD_START',flush=True)
+  print('CHECKPOINT_LOAD_START' if loaded_model is None else 'REUSE_LOADED_CHECKPOINT',flush=True)
   started=time.perf_counter()
-  model,params,tokenizer,sampling_sharding=load_model(args.checkpoint,args.model_shards)
+  model,params,tokenizer,sampling_sharding=(load_model(args.checkpoint,args.model_shards)
+      if loaded_model is None else loaded_model)
   print('CHECKPOINT_LOADED',time.perf_counter()-started,[str(d) for d in devices],flush=True)
   common=dict(model=model,params=params,tokenizer=tokenizer,
               cache_length=4096,max_out_length=args.max_new_tokens,canvas_length=256)

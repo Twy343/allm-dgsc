@@ -2,6 +2,49 @@
 
 Status captured 2026-11-16. Project: ALLM / DiffusionGemma SC only.
 
+## Latest measured progress and single-load replacement
+
+Job 13937837 completed normally after 20:58. It passed the native/Full SC gate
+and saved **28 GSM8K Full SC predictions**, 42 canvases and raw entropy traces.
+All 28 parsed answers passed exact match; this is a small incomplete prefix,
+not the final benchmark score. Batch-4 generation durations were 130.07, 86.89,
+88.87, 79.49, 91.15, 113.25, 81.76 s. The first is affected by warmup; no
+claim of fast end-to-end throughput is supported by these measurements.
+
+The short-window approach returned after its invocation limit and queued
+13938029, which would reload and recompile. The user requested avoiding this.
+That pending continuation was canceled. Replacement **13938446** requests one
+PRO 6000 for three hours and is pending at this snapshot. One Python process
+loads weights once, measures batches 4/8/16 with the same 16 prompts and entropy
+instrumentation, then reuses the exact in-memory model/params through all five
+conditions at the selected batch size. No deliberate invocation time/batch limit
+is applied to this process. Slurm's allocation still has a three-hour hard cap;
+completion time is not yet established.
+
+Entry: `scripts/benchmark_256_once.sbatch`; output:
+`outputs/sc-test256-once-v3`. It includes profiling warmup separately, steady
+measurements, device memory stats and selected batch. First 28 legacy outputs
+remain in `outputs/sc-test256-largegpu-v1` and are not mixed into a run with a
+different batch partition/source fingerprint. No recurring monitor exists.
+
+## GPU allocated and checkpoint loaded
+
+At approximately 18:01-18:05 EST, job **13937837 is RUNNING on ins046** with
+exactly one RTX PRO 6000 Blackwell Server Edition. Actual NVML total memory:
+97,887 MiB; observed usage during the native batch gate: 66,171 MiB. Unchanged
+restored parameter arrays total **50,501,973,564 bytes**. Restore took 54.38 s.
+The log reached `NATIVE_BATCH_GATE_START 4`; no formal predictions had been
+written at this snapshot. The Python process was active (~125% CPU), consistent
+with first compilation/prefill/generation setup, not a queue wait. Do not claim
+completed native equality or benchmark scores until their result markers exist.
+
+The user's exact generic `srun -A edu --gres=gpu:1 -c4 --mem=32G -t3h --pty
+/bin/bash` in `--test-only` mode selected the short partition; it does not
+itself guarantee a GPU model. This was only a diagnostic, not another allocation.
+No submission-rate-limit error has been observed. Do not cancel/re-submit the
+currently running allocation while investigating defaults. Older status entries
+below are historical.
+
 ## Actual short interactive allocation attempt
 
 At about 17:50 EST, attempted an actual single-GPU interactive allocation:

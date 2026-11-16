@@ -1,5 +1,12 @@
 # Matched test256 run
 
+Latest execution change: avoid repeated model loads. Use
+`scripts/benchmark_256_once.sbatch` / `profile_then_run.py`, one three-hour GPU
+allocation, a single weight restore, batch 4/8/16 profiling and the five formal
+conditions in the same process. Selected batch is fixed across all conditions.
+Output: `outputs/sc-test256-once-v3`. The earlier short-chain configuration below
+is superseded; its 28 measured Full SC outputs are preserved separately.
+
 Current execution uses resumable short allocations through
 `scripts/benchmark_256_chunks.sbatch`: one PRO 6000, 32 GB host RAM, 30-minute
 windows, roughly 20-minute per-invocation budget checked after saved batches,
