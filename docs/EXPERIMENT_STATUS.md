@@ -2,6 +2,26 @@
 
 Status captured 2026-11-16. Project: ALLM / DiffusionGemma SC only.
 
+## Latest user revision and replacement jobs
+
+The model download and 33-object integrity verification have completed. Manifest
+digest: `518abf72853c48679c8c412c928ae2cd09a0b61e284ad0bdbd5b7131fd23c48c`.
+The user requests 256 test cases per task and five sequential conditions: Full,
+zero SC at 48/96 steps, top-k=8, threshold=.03, with batching and entropy traces.
+See TEST256_PROTOCOL.md. This supersedes the earlier pilot/full-test plan.
+
+- Old score/pilot job 13932936 was canceled while pending; it never generated
+  benchmark predictions.
+- New CPU input/batched-entropy validation 13934626 completed: 25 tests passed,
+  tiny native/batched entropy equivalence passed, all 256 selected MBPP reference
+  solutions passed, and 256-case manifests for both tasks were saved.
+- New batched benchmark: 13934635, one H100, batch size 4, burst partition/QOS,
+  validation dependency is satisfied; currently pending for GPU priority.
+  Results: `outputs/sc-test256-v2`. No new benchmark output exists yet.
+- Existing beta-sweep job 13933040 is moved to burst and chained after 13934635.
+- There is no recurring automation. Download/verification job 13933051 completed
+  successfully. Older sections below are historical snapshots, not live status.
+
 ## Verified
 
 - SSH key authentication works with `id_ed25519_insomnia`; the initial transient

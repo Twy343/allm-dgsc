@@ -10,6 +10,8 @@ import dataclasses
 import functools
 
 import jax.numpy as jnp
+import jax
+from typing import Any
 from gemma.diffusion import _chat_sampler, _sampler
 
 from exp_code.common.sc_modes import SelfConditioningMode
@@ -23,9 +25,18 @@ def _init_fields(instance):
 @dataclasses.dataclass(frozen=True, kw_only=True)
 class SCDiffusionSampler(_sampler.DiffusionSampler):
   sc_mode: SelfConditioningMode = SelfConditioningMode()
+  entropy_callback: Any = dataclasses.field(default=None, repr=False)
 
   def sample_step(self, **kwargs):
     output = super().sample_step(**kwargs)
+    if self.entropy_callback is not None:
+      log_probs = jax.nn.log_softmax(output.logits.astype(jnp.float32))
+      probs = jnp.exp(log_probs)
+      entropy = -jnp.sum(probs*jnp.where(probs==0,0.,log_probs),axis=-1)
+      step = jnp.rint((1-kwargs['current_noise_proportion'][0])*self.max_denoising_steps).astype(jnp.int32)
+      stop = self.early_stop_fn.should_stop(step=step,
+          canvas=output.sampled_tokens,previous_canvas=kwargs['canvas'],logits=output.logits)
+      jax.debug.callback(self.entropy_callback,step,entropy,stop,ordered=True)
     logits = self.sc_mode.transform_logits(output.logits)
     if logits is output.logits:
       if self.sc_mode.beta == 1.0:
@@ -44,10 +55,12 @@ class SCDiffusionSampler(_sampler.DiffusionSampler):
 @dataclasses.dataclass(frozen=True, kw_only=True)
 class SCSampler(_chat_sampler.Sampler):
   sc_mode: SelfConditioningMode = SelfConditioningMode()
+  entropy_callback: Any = dataclasses.field(default=None, repr=False)
 
   def _initialize_sampler_loop(self, sampling):
     original = super()._initialize_sampler_loop(sampling)
-    return SCDiffusionSampler(**_init_fields(original), sc_mode=self.sc_mode)
+    return SCDiffusionSampler(**_init_fields(original), sc_mode=self.sc_mode,
+                              entropy_callback=self.entropy_callback)
 
 
 @dataclasses.dataclass(frozen=True, kw_only=True, eq=False)

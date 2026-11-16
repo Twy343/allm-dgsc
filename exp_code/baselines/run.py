@@ -70,6 +70,7 @@ def score(task, text, case):
 def summarize(output):
   metadata = json.loads((output / 'run.json').read_text())
   plans = metadata['plans']
+  modes = tuple(metadata.get('conditions', MODES))
   groups = defaultdict(list)
   for line in (output / 'predictions.jsonl').read_text(encoding='utf-8').splitlines():
     row = json.loads(line)
@@ -79,19 +80,24 @@ def summarize(output):
   summary = {}
   for task in plans:
     expected = {c['id'] for c in plans[task]['cases']}
-    for mode in MODES:
+    for mode in modes:
       rows = groups[(task, mode)]
       ids = [r['case_id'] for r in rows]
       if len(set(ids)) != len(ids) or not set(ids) <= expected:
         raise ValueError('Duplicate or foreign case')
+      step_lengths=[n for r in rows for n in r.get('steps',[])]
       summary[f'{task}/{mode}'] = dict(
           completed=len(rows), expected=len(expected), complete=set(ids)==expected,
           accuracy=sum(r['score']['passed'] for r in rows)/len(rows) if rows else None,
           generation_seconds=sum(r['generation_seconds'] for r in rows),
           metric='exact_match' if task=='gsm8k' else 'pass@1_single_sample',
+          effective_sample_canvas_steps=sum(step_lengths),
+          mean_steps_per_canvas=sum(step_lengths)/len(step_lengths) if step_lengths else None,
+          canvas_cap_hits=sum(sum(r.get('cap_reached',[])) for r in rows),
+          recorded_canvases=len(step_lengths),
       )
     baseline = {r['case_id']: int(r['score']['passed']) for r in groups[(task,'full')]}
-    for mode in MODES[1:]:
+    for mode in modes[1:]:
       variant = {r['case_id']: int(r['score']['passed']) for r in groups[(task,mode)]}
       shared = baseline.keys() & variant.keys()
       differences = [variant[i]-baseline[i] for i in sorted(shared)]

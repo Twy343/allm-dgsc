@@ -9,6 +9,11 @@ Scope: inference-time experiments only; no training or fine-tuning.
 available. Cluster validation and checkpoint acquisition are in progress; no
 capability reproduction result is claimed. See [baseline protocol](docs/BASELINE_PLAN.md).
 
+The immediate run is now 256 fixed test cases per task, batch size 4, five
+sequential conditions (including zero SC at 48 and 96 steps), with entropy saved
+for every sample. See [current protocol](docs/TEST256_PROTOCOL.md). The original
+64-case pilot submission was replaced; no recurring monitor is enabled.
+
 ## Layout
 
 ```text

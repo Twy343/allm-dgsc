@@ -14,6 +14,7 @@ from exp_code.common.sc_modes import SelfConditioningMode
 from exp_code.common.sc_sampler import SCDiffusionSampler
 from exp_code.common.probability import softmax, top_k_logits, threshold_logits
 from exp_code.common.dg_runner import run_fixed_trajectory
+from exp_code.baselines.entropy_recorder import EntropyRecorder
 
 
 def main():
@@ -104,6 +105,27 @@ def main():
   disabled = run_fixed_trajectory(sampler=native, sc_mode=SelfConditioningMode(kind='disabled'),
       **{k:v for k,v in generate.items() if k!='canvas_length'})
   np.testing.assert_array_equal(zeros.final_canvas,disabled.final_canvas)
+  for kind in ('full','disabled','top_k','threshold'):
+    recorder=EntropyRecorder(4,canvas_length=4)
+    plain=SCDiffusionSampler(**settings,sc_mode=SelfConditioningMode(kind=kind))
+    observed=dataclasses.replace(plain,entropy_callback=recorder.record)
+    batch=dict(generate,batch_size=2)
+    expected=plain.sample_next_canvas(**batch)
+    result=observed.sample_next_canvas(**batch)
+    jax.effects_barrier()
+    np.testing.assert_array_equal(expected,result)
+    for i in range(2):
+      payload=recorder.sample(i,np.asarray(result[i]),(99,))
+      assert payload['steps'].tolist()==[4]
+      assert payload['entropy'].shape==(1,4,4)
+      assert np.isfinite(payload['entropy']).all()
+  recorder=EntropyRecorder(4,canvas_length=4)
+  observed=dataclasses.replace(full,entropy_callback=recorder.record,
+      early_stop_fn=_early_stopping.EntropyEarlyStop(entropy_threshold=100))
+  result=observed.sample_next_canvas(**dict(generate,batch_size=2))
+  jax.effects_barrier()
+  assert recorder.sample(0,np.asarray(result[0]),(99,))['steps'].tolist()==[1]
+  print('BATCHED_ENTROPY_NATIVE_EQUIVALENCE_VERIFIED',flush=True)
   print('TINY_SC_BOUNDARY_AND_LOOP_VERIFIED', jax.__version__, jax.devices(), flush=True)
 
 

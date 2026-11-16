@@ -1,5 +1,11 @@
 # SC bottleneck reproduction
 
+**Latest immediate run:** the user now requests 256 test cases per task, five
+conditions including zero SC at 48 and 96 steps, batching and per-step entropy.
+See [TEST256_PROTOCOL.md](TEST256_PROTOCOL.md). This supersedes the pilot/full-test
+execution sequence below for the current run; the earlier protocol is retained
+for history.
+
 ## Scope and order
 
 The interim report uses three components: four-condition score evaluation, a

@@ -1,5 +1,11 @@
 # Interim report evidence
 
+Latest execution revision (2026-11-16): 256 fixed test examples per task,
+batch size 4; Full, zero SC at 48 steps, zero SC at 96 steps, top-k=8 and
+threshold=.03. Save entropy for every sample/canvas/step and report both scores
+and stopping/cap behavior. This replaces the earlier 64-case pilot below for
+the immediate run. See TEST256_PROTOCOL.md.
+
 ## Research question
 
 What does SC contribute to answer quality and denoising dynamics, and which

@@ -37,7 +37,7 @@ def prepare(task, dataset_dir, stage='pilot', selection_seed=4953):
   split = 'train' if stage in ('smoke', 'pilot') else 'test'
   source = dataset[split]
   limit = {'smoke': 2, 'pilot': 64, 'subset': 256 if task == 'gsm8k' else 128,
-           'full': len(source)}[stage]
+           'test256': 256, 'full': len(source)}[stage]
   if len(source) < limit:
     raise ValueError(f'{task}/{split}: need {limit}, got {len(source)}')
   indices = list(range(len(source)))
