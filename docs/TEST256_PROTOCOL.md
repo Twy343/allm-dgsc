@@ -48,6 +48,6 @@ Entry point: `scripts/benchmark_256.sbatch`; results in
 `outputs/sc-test256-v2/`. Model download and verification are already complete.
 An independent CPU job validates callbacks/native equivalence and checks all
 256 selected MBPP references before the benchmark starts. Request one H100 in
-the authorized burst partition, at most eight hours; this is a wall-time ceiling,
+the authorized burst partition, at most four hours; this is a wall-time ceiling,
 not an ETA. No recurring monitor is enabled. Earlier beta-sweep visualization
 is retained as a separate subsequent job, not mixed into benchmark conditions.

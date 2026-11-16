@@ -6,7 +6,7 @@
 #SBATCH --gres=gpu:h100:1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=120G
-#SBATCH --time=08:00:00
+#SBATCH --time=04:00:00
 #SBATCH --output=/insomnia001/depts/edu/users/yc4953/logs/allm-sc-test256-%j.log
 set -euo pipefail
 export SLURM_CONF=/etc/slurm/slurm.conf

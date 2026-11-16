@@ -21,6 +21,8 @@ See TEST256_PROTOCOL.md. This supersedes the earlier pilot/full-test plan.
 - Existing beta-sweep job 13933040 is moved to burst and chained after 13934635.
 - There is no recurring automation. Download/verification job 13933051 completed
   successfully. Older sections below are historical snapshots, not live status.
+- Pending GPU wall-time request reduced to four hours after scheduler probes
+  showed an earlier backfill opportunity than the initial eight-hour ceiling.
 
 ## Verified
 
