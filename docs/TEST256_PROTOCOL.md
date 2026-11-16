@@ -1,5 +1,10 @@
 # Matched test256 run
 
+Hardware alternative: the two-A6000 route preserves this sample/condition plan
+and batch size 4 using the original loader's FSDP sharding. It uses its own output
+directory and separate hardware provenance; see GPU_OPTIONS.md. Invocation limits
+control resumable chunks only and do not change the planned 256 test cases.
+
 User revision on 2026-11-16 supersedes the earlier 64-per-task pilot and full-test
 target for the immediate experiment. Run 256 fixed test cases from GSM8K and
 256 fixed sanitized MBPP test cases, five conditions sequentially (2,560 outputs):

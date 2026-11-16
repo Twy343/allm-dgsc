@@ -2,6 +2,17 @@
 
 Status captured 2026-11-16. Project: ALLM / DiffusionGemma SC only.
 
+## Alternative GPU route
+
+The user requested use of 6000-series GPUs rather than waiting only for H100.
+An actual RTX A6000 allocation (13935944) passed a CUDA/JAX computation and
+reported 49,140 MiB VRAM. Two-card checkpoint loading/generation is not yet
+verified. See GPU_OPTIONS.md. New pending jobs are 13936244 (first formal batch
+on two A6000s) and 13936227 (continuation after a successful first batch).
+The original H100 benchmark 13934635 and separate beta job 13933040 are held.
+The first-batch and continuation scripts release H100 on failure; the complete
+A6000 run cancels H100 on success. They do not run the same benchmark concurrently.
+
 ## Latest user revision and replacement jobs
 
 The model download and 33-object integrity verification have completed. Manifest

@@ -34,6 +34,9 @@ def main():
   parser.add_argument('--checkpoint',type=Path)
   parser.add_argument('--output',type=Path,required=True)
   parser.add_argument('--batch-size',type=int,choices=(1,2,4,8),default=4)
+  parser.add_argument('--model-shards',type=int,choices=(1,2),default=1)
+  parser.add_argument('--max-batches',type=int,
+                      help='Optional invocation limit; save valid partial results for resume')
   parser.add_argument('--seed',type=int,default=0)
   parser.add_argument('--max-new-tokens',type=int,default=1024)
   parser.add_argument('--prepare-only',action='store_true')
@@ -42,6 +45,8 @@ def main():
     parser.error('max-new-tokens must be 256/512/768/1024')
   if not args.prepare_only and args.checkpoint is None:
     parser.error('--checkpoint is required')
+  if args.max_batches is not None and args.max_batches<1:
+    parser.error('--max-batches must be positive')
   args.output.mkdir(parents=True,exist_ok=True)
   with run_lock(args.output):
     plans={task:prepare(task,args.data_root/path,'test256') for task,path in
@@ -66,12 +71,15 @@ def evaluate(args,plans):
   from gemma import gm,diffusion
   from exp_code.common.sc_modes import SelfConditioningMode
   from exp_code.common.sc_sampler import SCSampler
+  from exp_code.baselines.model_loading import load_model
 
   devices=jax.devices()
   if not any(d.platform=='gpu' for d in devices):
     raise RuntimeError('A GPU allocation is required')
   metadata=dict(protocol='test256-batched-entropy-v2',plans=plans,conditions=CONDITIONS,
       source_sha256=source_identity(),checkpoint_sha256=checkpoint_identity(args.checkpoint),
+      model_shards=args.model_shards,
+      parameter_sharding='kauldron FSDPSharding' if args.model_shards>1 else 'single_device',
       checkpoint=str(args.checkpoint),batch_size=args.batch_size,seed=args.seed,
       rng_policy='seed + task_index*100000 + fixed_batch_index; identical across conditions',
       max_new_tokens=args.max_new_tokens,canvas_length=256,cache_length=4096,
@@ -99,9 +107,7 @@ def evaluate(args,plans):
       done.add((row['task'],row['mode'],row['case_id']))
   print('CHECKPOINT_LOAD_START',flush=True)
   started=time.perf_counter()
-  model=diffusion.DiffusionGemma_26B_A4B()
-  params=gm.ckpts.load_params(str(args.checkpoint),text_only=True)
-  tokenizer=gm.text.Gemma4Tokenizer(path=str(args.checkpoint/'tokenizer.model'))
+  model,params,tokenizer,sampling_sharding=load_model(args.checkpoint,args.model_shards)
   print('CHECKPOINT_LOADED',time.perf_counter()-started,[str(d) for d in devices],flush=True)
   common=dict(model=model,params=params,tokenizer=tokenizer,
               cache_length=4096,max_out_length=args.max_new_tokens,canvas_length=256)
@@ -112,9 +118,11 @@ def evaluate(args,plans):
   gate_prompts=prompts(gate_cases)
   print('NATIVE_BATCH_GATE_START',args.batch_size,flush=True)
   native=diffusion.Sampler(**common,max_denoising_steps=48)
-  expected=native.sample(gate_prompts,rng=args.seed,max_new_tokens=args.max_new_tokens,return_state=True)
+  expected=native.sample(gate_prompts,rng=args.seed,max_new_tokens=args.max_new_tokens,
+                         return_state=True,sharding=sampling_sharding)
   full=SCSampler(**common,max_denoising_steps=48)
-  actual=full.sample(gate_prompts,rng=args.seed,max_new_tokens=args.max_new_tokens,return_state=True)
+  actual=full.sample(gate_prompts,rng=args.seed,max_new_tokens=args.max_new_tokens,
+                     return_state=True,sharding=sampling_sharding)
   np.testing.assert_array_equal(expected.tokens,actual.tokens)
   if expected.text!=actual.text:
     raise AssertionError('Full SC/native batch text differs')
@@ -122,6 +130,7 @@ def evaluate(args,plans):
   write_json(args.output/'full-sc-gate.json',dict(passed=True,batch_size=args.batch_size,
       run_sha256=metadata['sha256'],case_ids=[c['id'] for c in gate_cases]))
   del expected,actual,native,full
+  completed_batches=0
   for name,condition in CONDITIONS.items():
     recorder=EntropyRecorder(condition['steps'])
     sampler=SCSampler(**common,max_denoising_steps=condition['steps'],
@@ -136,7 +145,7 @@ def evaluate(args,plans):
         batch_seed=args.seed+task_index*100000+batch_index
         start=time.perf_counter()
         output=sampler.sample(prompts(cases),rng=batch_seed,
-            max_new_tokens=args.max_new_tokens,return_state=True)
+            max_new_tokens=args.max_new_tokens,return_state=True,sharding=sampling_sharding)
         jax.block_until_ready(output.tokens)
         jax.effects_barrier()
         elapsed=time.perf_counter()-start
@@ -167,6 +176,10 @@ def evaluate(args,plans):
           done.add(key)
         print('BATCH_COMPLETE',name,task,batch_index,'n',len(cases),'seconds',elapsed,flush=True)
         summarize(args.output)
+        completed_batches+=1
+        if args.max_batches is not None and completed_batches>=args.max_batches:
+          print('INVOCATION_LIMIT_SAVED_FOR_RESUME',completed_batches,flush=True)
+          return
     print('CONDITION_COMPLETE',name,flush=True)
     del sampler
   final=summarize(args.output)
