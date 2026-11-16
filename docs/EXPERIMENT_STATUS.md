@@ -2,6 +2,20 @@
 
 Status captured 2026-11-16. Project: ALLM / DiffusionGemma SC only.
 
+## Corrected active GPU request
+
+Inventory job 13937058 confirmed `R6000` on ins046 is NVIDIA RTX PRO 6000
+Blackwell Server Edition (96 GB model specification), not the 48 GB A6000.
+The earlier failure to distinguish those aliases caused unnecessary delay.
+Dual-A6000 jobs 13936244/13936227 were canceled while pending, without scores.
+
+Current benchmark job: **13937073**, single GPU, constraint `h100|R6000`, batch
+size 4, same 256 test cases per task and same five SC conditions. It checks
+actual memory >=75,000 MiB, restores unchanged weights and runs native/Full SC
+gates before recording scores. Results: `outputs/sc-test256-largegpu-v1`.
+The H100-only fallback 13934635 and old beta job 13933040 remain held.
+No recurring automation is enabled. Remaining sections are historical snapshots.
+
 ## Alternative GPU route
 
 The user requested use of 6000-series GPUs rather than waiting only for H100.

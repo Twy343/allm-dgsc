@@ -1,5 +1,11 @@
 # Matched test256 run
 
+Current resource request is ONE GPU on `h100|R6000` nodes: H100 or the confirmed
+RTX PRO 6000 Blackwell Server Edition. Actual memory is checked before loading.
+Results: `outputs/sc-test256-largegpu-v1`. Dual-A6000 submissions were canceled;
+the older alternative below is retained only for history. The 256-case, batch-4,
+five-condition protocol is unchanged.
+
 Hardware alternative: the two-A6000 route preserves this sample/condition plan
 and batch size 4 using the original loader's FSDP sharding. It uses its own output
 directory and separate hardware provenance; see GPU_OPTIONS.md. Invocation limits

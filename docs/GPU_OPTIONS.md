@@ -1,5 +1,28 @@
 # GPU eligibility and two-A6000 path
 
+## Corrected primary route
+
+The user correctly identified the PRO 6000 option. CPU inventory allocation
+13937058 on ins046 read `/proc/driver/nvidia/gpus/*/information`, reporting
+`NVIDIA RTX PRO 6000 Blackwell Server Edition` for the cards. This identifies
+Slurm alias `R6000` as the PRO series, distinct from `A6000`. NVIDIA specifies
+96 GB for this model; exact available memory will be recorded in the actual GPU
+allocation. NVML did not expose GPUs in that CPU-only inventory allocation.
+
+The dual-A6000 jobs 13936244 and 13936227 were canceled before starting. New job
+13937073 requests ONE GPU with node constraint `h100|R6000`, allowing H100 or
+PRO 6000 without allowing A6000/L40-class cards. It checks actual GPU memory
+before restoring unchanged weights and runs all five conditions at batch size 4.
+Results: `outputs/sc-test256-largegpu-v1`. This is the primary active route.
+The old H100-only job remains held as a fallback, not a concurrent benchmark.
+
+Resource script: `scripts/benchmark_256_largegpu.sbatch`, 64 GB host RAM and
+at most four hours. JAX memory fraction is explicitly .95 with preallocation
+disabled. The previous unvalidated dual-card alternative below is historical.
+
+Official specification:
+https://www.nvidia.com/en-us/data-center/rtx-pro-6000-blackwell-server-edition/
+
 On 2026-11-16 a real allocation (13935944, ins091) reported NVIDIA RTX A6000,
 49,140 MiB and driver 575.57.08. The existing ALLM JAX environment recognized
 the CUDA device and completed an accelerator sum. This establishes the runtime,
