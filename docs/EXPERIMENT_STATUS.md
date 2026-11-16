@@ -2,6 +2,23 @@
 
 Status captured 2026-11-16. Project: ALLM / DiffusionGemma SC only.
 
+## Actual short interactive allocation attempt
+
+At about 17:50 EST, attempted an actual single-GPU interactive allocation:
+`burst_interactive`, `h100|R6000`, one GPU, 32 GB host RAM, 20-minute limit,
+12-second immediate-allocation wait. Slurm job 13937888 returned
+`Unable to allocate resources: Requested nodes are busy`; no device or compute
+node was allocated. This was a real allocation attempt, not `--test-only`.
+The existing pending job 13937837 was held during the attempt and released on
+failure, avoiding duplicate active benchmark jobs. No recurring monitor exists.
+The eligible nodes' last inventory showed all 16 PRO 6000 and 6 H100 cards
+allocated. No GPU benchmark throughput has yet been measured.
+
+`scripts/quick_first_batches.sh` is ready to run the first three formal batches
+in the same result directory after a short allocation succeeds, to observe
+instrumented latency after the first warm batch. It is not an independently
+running or recurring task.
+
 ## Current single-job queue snapshot
 
 At 17:43-17:47 EST the account had ZERO running Slurm jobs and ZERO allocated

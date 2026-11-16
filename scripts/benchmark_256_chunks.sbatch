@@ -35,7 +35,7 @@ else
   # Resume on the SAME GPU model; never merge different hardware into one run.
   feature=$(python -c 'import json; k=json.load(open("outputs/sc-test256-largegpu-v1/run.json"))["device_kind"][0]; assert "RTX PRO 6000" in k or "H100" in k,k; print("R6000" if "RTX PRO 6000" in k else "h100")')
   sbatch --parsable --dependency="afterok:${SLURM_JOB_ID}" \
-    --constraint="$feature" --export="ALL,ALLM_CHUNK_INDEX=$next" \
+    --constraint="$feature" --gres="gpu:$feature:1" --export="ALL,ALLM_CHUNK_INDEX=$next" \
     scripts/benchmark_256_chunks.sbatch > "$destination/next-job-${SLURM_JOB_ID}.txt"
   echo 'PARTIAL_SAVED_NEXT_JOB' "$(cat "$destination/next-job-${SLURM_JOB_ID}.txt")"
 fi
