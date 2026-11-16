@@ -38,6 +38,7 @@ def run_fixed_trajectory(
     sc_mode: SelfConditioningMode = SelfConditioningMode(),
     intervention: LogitsIntervention | None = None,
     trace_config: TraceConfig = TraceConfig(),
+    stop_early: bool = False,
 ) -> TrajectoryTrace:
   """Runs a fixed number of steps and exposes the SC boundary.
 
@@ -55,6 +56,8 @@ def run_fixed_trajectory(
     max_denoising_steps = sampler.max_denoising_steps
   if max_denoising_steps <= 0:
     raise ValueError('max_denoising_steps must be positive')
+  if stop_early and batch_size != 1:
+    raise ValueError('Adaptive observation currently supports batch_size=1 only')
 
   initial_canvas_rng, step_rng = jax.random.split(rng)
   if cache is None:
@@ -120,13 +123,16 @@ def run_fixed_trajectory(
           f'{expected_shape}, got {sc_embeddings.shape}'
       )
   steps = []
+  stopped_early = False
+  noise_proportions = 1.0 - jnp.arange(max_denoising_steps + 1) / max_denoising_steps
+  step_function = jax.jit(sampler.sample_step)
 
   for step in range(max_denoising_steps):
     step_rng, sample_rng = jax.random.split(step_rng)
-    current_noise = 1.0 - step / max_denoising_steps
-    target_noise = 1.0 - (step + 1) / max_denoising_steps
+    current_noise = noise_proportions[step]
+    target_noise = noise_proportions[step + 1]
     canvas_before = canvas
-    output = sampler.sample_step(
+    output = step_function(
         canvas=canvas,
         sc_embeddings=sc_embeddings,
         cache=cache,
@@ -153,6 +159,7 @@ def run_fixed_trajectory(
     else:
       next_sc_embeddings = _encode_sc(sampler, params, sc_logits)
 
+    next_sc_embeddings = next_sc_embeddings * sc_mode.beta
     steps.append(
         summarize_step(
             step=step,
@@ -169,9 +176,17 @@ def run_fixed_trajectory(
     )
     canvas = output.sampled_tokens
     sc_embeddings = next_sc_embeddings.astype(jnp.bfloat16)
+    if stop_early and bool(jnp.all(sampler.early_stop_fn.should_stop(
+        step=jnp.asarray(step), canvas=canvas, previous_canvas=canvas_before,
+        logits=output.logits,
+    ))):
+      stopped_early = True
+      break
 
   return TrajectoryTrace(
       initial_canvas=initial_canvas,
       final_canvas=np.asarray(canvas),
       steps=tuple(steps),
+      stopped_early=stopped_early,
+      max_denoising_steps=max_denoising_steps,
   )

@@ -5,8 +5,9 @@ Causal Probing and Editable Reasoning in DiffusionGemma.
 Research scaffold for the Algorithms in Large Language Models final project.
 Scope: inference-time experiments only; no training or fine-tuning.
 
-**Status:** upstream source imported and the first experiment infrastructure is
-implemented. No checkpoint-backed run, generated case, or result is committed.
+**Status:** stage-one SC bottleneck implementation and evaluation entry point are
+available. Cluster validation and checkpoint acquisition are in progress; no
+capability reproduction result is claimed. See [baseline protocol](docs/BASELINE_PLAN.md).
 
 ## Layout
 
@@ -55,15 +56,17 @@ licenses, tests, examples, and documentation. It is tracked directly in this
 repository using a Git subtree, so a normal clone includes all source files.
 See [source provenance](docs/UPSTREAM.md) and [the upstream README](dg/README.md).
 
-Model weights are separate and have not been downloaded. Follow upstream setup
-instructions when beginning implementation; this scaffold does not yet claim a
-working inference environment.
+Model weights are stored separately. `exp_code/baselines/download_checkpoint.py`
+downloads the upstream public Orbax checkpoint with pinned object generations
+and file integrity verification. Existing cluster environment `allm` is used by
+the Slurm scripts; checkpoint-backed generation still needs its correctness gate.
 
 ## Data and Outputs
 
 Start with small controlled cases and then generated variants, as proposed.
 Dataset requirements are documented in [datasets/README.md](datasets/README.md).
-There are no downloaded benchmarks or fabricated experiment results.
+Cluster benchmarks are loaded from the user's external dataset directory;
+there are no raw benchmarks or fabricated experiment results committed here.
 
 Future runtime outputs belong in `outputs/`, which is ignored by Git. Keep model
 weights, caches, and large tensors out of the repository.

@@ -39,6 +39,8 @@ class TrajectoryTrace:
   initial_canvas: np.ndarray
   final_canvas: np.ndarray
   steps: tuple[StepTrace, ...]
+  stopped_early: bool = False
+  max_denoising_steps: int | None = None
 
   def save_npz(self, path: str | Path) -> None:
     """Writes one trajectory to a compressed, non-pickle NumPy archive."""
@@ -46,6 +48,8 @@ class TrajectoryTrace:
     destination.parent.mkdir(parents=True, exist_ok=True)
     payload: dict[str, np.ndarray] = {
         'initial_canvas': self.initial_canvas,
+        'stopped_early': np.asarray(self.stopped_early),
+        'step_cap': np.asarray(self.max_denoising_steps if self.max_denoising_steps is not None else len(self.steps)),
         'final_canvas': self.final_canvas,
         'step_indices': np.asarray([step.step for step in self.steps]),
         'current_noise_proportions': np.asarray(

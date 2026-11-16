@@ -10,7 +10,8 @@ Before the three main experiments:
 - Run unmodified DiffusionGemma inference at the pinned source version.
 - Reproduce full SC versus disabled SC (`S_t = 0`).
 - Evaluate sparse SC using top-k candidates, including `k = 8`, and probability
-  thresholding, including `p = 0.03`; document normalization conventions.
+  thresholding, including `p = 0.03`; preserve retained probabilities and
+  uniformly redistribute discarded mass as in the paper's Appendix C.
 - Inspect the actual upstream SC computation before defining intervention
   boundaries. Use the proposal's token-space formulation
   `P_t = softmax(L_t / tau_t)` and `S_t = P_t W_E` where applicable.
@@ -49,10 +50,15 @@ extreme vectors. Compare against unmodified rollouts, matched random
 interventions, and equal-magnitude irrelevant interventions. Use identical seeds
 and standardized sampling settings where appropriate.
 
-Dynamic revision should preferentially include cases where the final conclusion
-is unchanged but intermediate reasoning requires local edits. Recomputing prompt
-context and KV state is acceptable; efficiency is outside the initial scope.
+Dynamic revision begins with controlled context updates and extends to repeated
+updates that change the required answer. Refresh prompt conditioning/KV, reopen
+the existing canvas, and compare SC reuse/reset with fresh regeneration. Measure
+correctness, required/collateral edits and reconvergence steps/latency before
+making efficiency claims.
 
 No training, fine-tuning, large benchmark construction, or efficiency claims are
 part of the initial scaffold. Reproduction is an implementation check; the novel
 investigation begins with causal interventions on inter-step state.
+
+The current stage-one protocol and execution instructions are in
+[BASELINE_PLAN.md](BASELINE_PLAN.md).

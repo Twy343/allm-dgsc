@@ -50,14 +50,16 @@ class InterventionTest(unittest.TestCase):
         float(after[1, 0] - before[1, 0]),
     )
 
-  def test_sparse_modes_keep_expected_candidates(self):
+  def test_sparse_modes_preserve_retained_probability_and_tail_mass(self):
     logits = np.array([[[4.0, 3.0, 1.0, 0.0]]])
+    original = softmax(logits)
     top_k = top_k_logits(logits, 2)
-    self.assertEqual(int(np.isfinite(top_k).sum()), 2)
     thresholded = threshold_logits(logits, 0.2)
-    self.assertTrue(np.isfinite(thresholded[0, 0, 0]))
-    self.assertTrue(np.isfinite(thresholded[0, 0, 1]))
-    self.assertFalse(np.isfinite(thresholded[0, 0, 3]))
+    for result in (top_k, thresholded):
+      probs = softmax(result)
+      np.testing.assert_allclose(probs[..., :2], original[..., :2])
+      np.testing.assert_allclose(probs[..., 2:], original[..., 2:].sum() / 2)
+      np.testing.assert_allclose(probs.sum(axis=-1), 1)
 
   def test_revision_metrics(self):
     metrics = evaluate_revision(
