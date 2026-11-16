@@ -20,8 +20,8 @@ Status captured 2026-11-16. Project: ALLM / DiffusionGemma SC only.
 
 | Job | Purpose | State at capture |
 | --- | --- | --- |
-| 13932907 | Download official GCS checkpoint, pin generations and verify hashes | Running on ins091 |
-| 13933051 | Continue a partial download if needed; exit immediately if already verified | Waiting for 13932907 to end |
+| 13932907 | Original slow checkpoint download on ins091 | Canceled after safely retaining partial files |
+| 13933051 | Verify completed files / resume any missing bytes | Held during fast transfer; released automatically by transfer script |
 | 13932936 | Native/Full SC checkpoint gate, smoke, then 64-per-task four-mode pilot | Waiting for verified checkpoint chain |
 | 13933040 | New beta and bottleneck first-canvas entropy sweeps | Waiting for verified checkpoint chain |
 
@@ -32,6 +32,27 @@ a four-hour limit and range-resumes partial objects rather than restarting them.
 GPU jobs each request one H100: score job at most two hours, entropy at most one
 hour. These are requested ceilings, not measured usage. No new GPU result is
 claimed at capture.
+
+## Download bottleneck diagnosed and corrected
+
+On 2026-11-16, identical 8 MiB GCS range probes measured approximately 30.8 MB/s
+on the login node versus 1.42 MB/s on ins091. The original four-stream transfer
+averaged only a few MB/s. Disk capacity was sufficient. Before moving the writer,
+the continuation was held and the original download job was canceled and confirmed
+gone from the queue. Partial files were retained and resumed with pinned GCS
+generations; already complete objects were not retransferred.
+
+`scripts/transfer_checkpoint_login.sh` performs network transfer only under the
+system Python and low scheduling priority, then releases job 13933051. CPU hash
+verification remains on the compute allocation. Its PID is in
+`outputs/setup/login-transfer.pid`; its log is
+`/insomnia001/depts/edu/users/yc4953/logs/allm-checkpoint-login-transfer.log`.
+This is a one-off recovery script for these job IDs, not a generic submitter.
+
+After moving the transfer, on-disk byte counts rose from 31,181,972,862 to
+33,228,100,990 in 10 seconds (approximately 205 MB/s aggregate). This measured
+window is not a guaranteed sustained rate. There is no recurring monitor; jobs
+continue through their existing Slurm dependency chain.
 
 Both GPU dependencies were updated after the latest successful validation.
 Successful dependencies may disappear from `scontrol` once satisfied; the

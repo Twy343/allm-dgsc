@@ -35,7 +35,7 @@ def list_objects(prefix):
       return result
 
 
-def download(item, destination):
+def download(item, destination, verify=True):
   if destination.is_file() and destination.stat().st_size == int(item['size']):
     # Re-hash existing files too: length alone is not an integrity check.
     pass
@@ -59,6 +59,9 @@ def download(item, destination):
     if partial.stat().st_size != int(item['size']):
       raise ValueError(f'Incomplete object: {item["name"]}')
     partial.replace(destination)
+  if not verify:
+    return dict(name=item['name'], generation=item['generation'],
+                size=int(item['size']), verified=False)
   sha, md5 = hashlib.sha256(), hashlib.md5()
   with destination.open('rb') as stream:
     for block in iter(lambda: stream.read(8*1024*1024), b''):
@@ -74,6 +77,8 @@ def main():
   parser = argparse.ArgumentParser(description=__doc__)
   parser.add_argument('--output', type=Path, required=True)
   parser.add_argument('--list-only', action='store_true')
+  parser.add_argument('--transfer-only', action='store_true',
+                      help='Transfer pinned objects; leave hashing to the compute job')
   args = parser.parse_args()
   args.output.mkdir(parents=True, exist_ok=True)
   listing_file = args.output / 'gcs-objects.json'
@@ -100,12 +105,15 @@ def main():
     destination = args.output / relative
     if not destination.resolve().is_relative_to(args.output.resolve()):
       raise ValueError('Object name escapes destination')
-    result = download(item, destination)
-    print('VERIFIED', name, flush=True)
+    result = download(item, destination, verify=not args.transfer_only)
+    print('TRANSFERRED' if args.transfer_only else 'VERIFIED', name, flush=True)
     return result
 
   with ThreadPoolExecutor(max_workers=4) as pool:
     verified = list(pool.map(get_object, objects))
+  if args.transfer_only:
+    print('TRANSFER_COMPLETE_NOT_YET_VERIFIED', flush=True)
+    return
   manifest = dict(source='gs://' + BUCKET + '/' + PREFIX,
                   files=verified, sha256=digest(verified))
   (args.output / 'verified-manifest.json').write_text(json.dumps(manifest, indent=2))
