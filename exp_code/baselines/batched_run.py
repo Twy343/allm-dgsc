@@ -37,6 +37,8 @@ def main():
   parser.add_argument('--model-shards',type=int,choices=(1,2),default=1)
   parser.add_argument('--max-batches',type=int,
                       help='Optional invocation limit; save valid partial results for resume')
+  parser.add_argument('--max-seconds',type=int,
+                      help='Graceful invocation budget, checked after each saved batch')
   parser.add_argument('--seed',type=int,default=0)
   parser.add_argument('--max-new-tokens',type=int,default=1024)
   parser.add_argument('--prepare-only',action='store_true')
@@ -47,6 +49,8 @@ def main():
     parser.error('--checkpoint is required')
   if args.max_batches is not None and args.max_batches<1:
     parser.error('--max-batches must be positive')
+  if args.max_seconds is not None and args.max_seconds<1:
+    parser.error('--max-seconds must be positive')
   args.output.mkdir(parents=True,exist_ok=True)
   with run_lock(args.output):
     plans={task:prepare(task,args.data_root/path,'test256') for task,path in
@@ -65,6 +69,7 @@ def main():
 
 
 def evaluate(args,plans):
+  invocation_started=time.monotonic()
   import dialog
   import jax
   import numpy as np
@@ -179,6 +184,9 @@ def evaluate(args,plans):
         completed_batches+=1
         if args.max_batches is not None and completed_batches>=args.max_batches:
           print('INVOCATION_LIMIT_SAVED_FOR_RESUME',completed_batches,flush=True)
+          return
+        if args.max_seconds is not None and time.monotonic()-invocation_started>=args.max_seconds:
+          print('TIME_BUDGET_SAVED_FOR_RESUME',completed_batches,flush=True)
           return
     print('CONDITION_COMPLETE',name,flush=True)
     del sampler

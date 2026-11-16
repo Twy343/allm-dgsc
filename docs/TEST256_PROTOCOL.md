@@ -1,5 +1,13 @@
 # Matched test256 run
 
+Current execution uses resumable short allocations through
+`scripts/benchmark_256_chunks.sbatch`: one PRO 6000, 32 GB host RAM, 30-minute
+windows, roughly 20-minute per-invocation budget checked after saved batches,
+maximum eight sequential windows. Hardware is held constant across continuations.
+Limits govern invocation duration only, not sample counts or condition settings.
+Actual resource allocation remains subject to Slurm; test-only estimates are
+not promises that a visible idle GPU can be allocated immediately.
+
 Current resource request is ONE GPU on `h100|R6000` nodes: H100 or the confirmed
 RTX PRO 6000 Blackwell Server Edition. Actual memory is checked before loading.
 Results: `outputs/sc-test256-largegpu-v1`. Dual-A6000 submissions were canceled;

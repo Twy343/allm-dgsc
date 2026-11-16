@@ -2,6 +2,30 @@
 
 Status captured 2026-11-16. Project: ALLM / DiffusionGemma SC only.
 
+## Current single-job queue snapshot
+
+At 17:43-17:47 EST the account had ZERO running Slurm jobs and ZERO allocated
+GPUs. Old held jobs 13934635 and 13933040 were canceled to remove redundant
+queue entries. They had not consumed GPUs or generated benchmark outputs.
+
+Only job **13937837** remains pending: one node, one RTX PRO 6000 (`R6000`),
+32 GB host memory, batch size 4, a 30-minute allocation window. The application
+saves each batch and returns after an approximately 20-minute invocation budget;
+the script submits a sequential same-hardware continuation if still incomplete,
+up to eight windows (four requested GPU-hours). This is a finite task chain, not
+a recurring monitor. All five conditions and fixed 256-case-per-task plans remain
+unchanged. No actual generation has started in this snapshot.
+
+Scheduler inspection showed one unallocated PRO 6000 on ins046, but the node
+was PLANNED and the actual job still waited. `sbatch --test-only` gave earlier
+estimates for short jobs, while actual queue estimates differed. Do not present
+that test-only estimate as a guaranteed allocation or claim wall time was the
+sole proven blocker. GPU speed has not been measured by this benchmark yet.
+
+The new script avoids enforcing GPU-local CPU binding and requests less host
+memory; actual queued resources normalize to six CPUs. Prior entries below are
+historical. Results remain `outputs/sc-test256-largegpu-v1`.
+
 ## Corrected active GPU request
 
 Inventory job 13937058 confirmed `R6000` on ins046 is NVIDIA RTX PRO 6000
