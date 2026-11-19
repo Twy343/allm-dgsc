@@ -14,6 +14,20 @@ from exp_code.semantic_intervention.metrics import token_log_probability_change
 
 class InterventionTest(unittest.TestCase):
 
+  def test_semantic_full_swap_keeps_all_other_logits_and_extreme_tail(self):
+    logits=np.array([[[8.,2.,-1000.,-2000.],[1.,4.,-3.,-7.]]],dtype=np.float32)
+    original=logits.copy()
+    result=swap_token_probabilities(logits,batch_index=0,position=0,source_token_id=0,target_token_id=1)
+    np.testing.assert_array_equal(logits,original)
+    np.testing.assert_array_equal(result[0,0],original[0,0,[1,0,2,3]])
+    np.testing.assert_array_equal(result[0,1],original[0,1])
+    self.assertEqual(result.dtype,original.dtype)
+
+  def test_zero_fraction_is_a_true_identity(self):
+    logits=np.array([[[1.,2.,-1000.]]],dtype=np.float32)
+    self.assertIs(swap_token_probabilities(logits,batch_index=0,position=0,
+        source_token_id=0,target_token_id=1,fraction=0),logits)
+
   def test_semantic_swap_preserves_probability_row(self):
     logits = np.array([[[2.0, 1.0, 0.0, -1.0]]])
     before = softmax(logits)[0, 0]

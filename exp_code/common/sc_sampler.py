@@ -70,3 +70,14 @@ class SCChatSampler(_chat_sampler.ChatSampler):
   @functools.cached_property
   def sampler(self):
     return SCSampler(**_init_fields(super().sampler), sc_mode=self.sc_mode)
+
+
+def sampler_for_condition(condition,*,model,**kwargs):
+  """Construct SC bottleneck or post-MLP branch-strength interventions."""
+  if condition['kind']=='branch_scaled':
+    from exp_code.common.sc_strength import scaled_model
+    model=scaled_model(model,float(condition['beta']))
+    mode=SelfConditioningMode(kind='full')
+  else:
+    mode=SelfConditioningMode(kind=condition['kind'])
+  return SCSampler(model=model,sc_mode=mode,**kwargs)

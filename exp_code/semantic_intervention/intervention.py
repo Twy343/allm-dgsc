@@ -26,8 +26,22 @@ def swap_token_probabilities(
     raise ValueError('source and target token IDs must differ')
   if not 0.0 <= fraction <= 1.0:
     raise ValueError('fraction must be in [0, 1]')
+  if fraction==0:
+    return logits
   xp = probability.array_module(logits)
   row_logits = logits[batch_index, position, :]
+  if fraction==1:
+    # Swapping two logits permutes their probabilities exactly in real
+    # arithmetic, including extreme/underflowing tails. Leave other logits
+    # bitwise unchanged rather than softmax/log round-tripping the full row.
+    if probability.is_jax_array(logits):
+      new_row=row_logits.at[source_token_id].set(row_logits[target_token_id])
+      new_row=new_row.at[target_token_id].set(row_logits[source_token_id])
+    else:
+      new_row=xp.array(row_logits,copy=True)
+      new_row[source_token_id]=row_logits[target_token_id]
+      new_row[target_token_id]=row_logits[source_token_id]
+    return probability.replace_row(logits,batch_index,position,new_row)
   row_probs = probability.softmax(row_logits)
   source_probability = row_probs[source_token_id]
   target_probability = row_probs[target_token_id]
