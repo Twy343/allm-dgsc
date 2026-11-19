@@ -1,0 +1,204 @@
+{
+  "source": "gs://gemma-data/checkpoints/diffusiongemma-26B-A4B-it/",
+  "files": [
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/_CHECKPOINT_METADATA",
+      "generation": "1781107112521941",
+      "size": 258,
+      "sha256": "5d76fe7ce2c058b9678277c61b329ca9c455fbc213ae59783ebf0ca81d2760c9"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/_METADATA",
+      "generation": "1781107112993298",
+      "size": 162775,
+      "sha256": "bac08aabeb91b70b8eb2f8b88e643680bc950d06b0f7e39e6ccc32da85e33cb9"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/commit_success.txt",
+      "generation": "1781196690817208",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/d/9eb4bbc3ae5af5896d7ba90c31989f89",
+      "generation": "1781107114003578",
+      "size": 22960,
+      "sha256": "4fafa2fcae826ca7f90177974f33f78d5ee5b3e13728f6d00673dddd97678335"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/d_$folder$",
+      "generation": "1781107109805565",
+      "size": 6,
+      "sha256": "034a0062488256f14c8b14d025ec3988b148938f7f9db94ca0ac73f4b3614d8a"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/descriptor/descriptor.pbtxt",
+      "generation": "1781107113932275",
+      "size": 535,
+      "sha256": "a95094d8076d10672d58d8e28c718b6223792ef4f385b5ee6a134f45bcb98181"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/descriptor/uuid-d5723c9b-4e58-407a-bedb-6694bf94a11e",
+      "generation": "1781107114205155",
+      "size": 45,
+      "sha256": "d0dd5e3728ca6571b0965511f9a412e929d2a415a97c7c706202eb82174b380a"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/descriptor_$folder$",
+      "generation": "1781107110039830",
+      "size": 6,
+      "sha256": "034a0062488256f14c8b14d025ec3988b148938f7f9db94ca0ac73f4b3614d8a"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/manifest.ocdbt",
+      "generation": "1781107112677335",
+      "size": 121,
+      "sha256": "39c21d11bd3cd7ea4a2efaf9565fdec237891d06feccac5f1b07a7d0b04ffcc7"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/ocdbt.process_0/d/1603b3c135bd1af4ba8b6e139b8e073c",
+      "generation": "1781114235192807",
+      "size": 2385338368,
+      "sha256": "f480ba9224042bc42c8deb04ea1614da227f61dec2fc537dd9857b49d26fe018"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/ocdbt.process_0/d/1f29021ef7369114d39130052a1ca643",
+      "generation": "1781114283407030",
+      "size": 2746724352,
+      "sha256": "70b59be4ac7e6c6d5385f0f4a974fffb0b7265bd01b636667d761a372063fbc5"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/ocdbt.process_0/d/20042fa3b267deb28ae975426f37623b",
+      "generation": "1781114142297810",
+      "size": 2385317888,
+      "sha256": "4f546763d98cf4a7ccd714e97f5c6e62904b5daea1713daab11315710f8e1789"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/ocdbt.process_0/d/21f35175142e71865d33d9c9d1585bb4",
+      "generation": "1781107656069418",
+      "size": 1085808640,
+      "sha256": "7606bbeff27723fc42653c002aacc306a686368d75cc6d12b0cf4814ba5b7df2"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/ocdbt.process_0/d/42a7c5db9e654f0c5d0b91a45362a701",
+      "generation": "1781113775482275",
+      "size": 2186592256,
+      "sha256": "5c95a113da9ac161426fa002f2e9f0375b0fb0878eba903bf1ba2c3304d89602"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/ocdbt.process_0/d/49115eed739aebfb89af862d3e4c3518",
+      "generation": "1781114164525025",
+      "size": 2385899520,
+      "sha256": "7996c0268957136ebd29f4d4039887d1d05d84bc2e6cdda9c16dc8e19aada164"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/ocdbt.process_0/d/59f7f4cfb028d3e07cf41c8b3ed57ed9",
+      "generation": "1781113420393144",
+      "size": 2400665600,
+      "sha256": "a89b38e52e5d46eadc3d840ed09eb9f5f4de84e84e9f9f377a7db13c0dc308b2"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/ocdbt.process_0/d/61ecb698f35f9c040914885e6669c245",
+      "generation": "1781107117600365",
+      "size": 22945,
+      "sha256": "05a02af1d8f1344186a6d4bac91d99a8e4b43831f413326c0be95c39ecdafc96"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/ocdbt.process_0/d/69d20d324788480216620fde59494a72",
+      "generation": "1781114223093797",
+      "size": 2384699392,
+      "sha256": "0398e2eafba1b4e5fca059a35f680f1ef0eec51d4b16789f624e507b70cded11"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/ocdbt.process_0/d/71eef8c96172232a2ceb2a42deac5085",
+      "generation": "1781113973375254",
+      "size": 2373185536,
+      "sha256": "95eef636b804312c2b1655796295c2da83509a9a1c4eaaa83246d3820675fa17"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/ocdbt.process_0/d/74f13d6c56c6da1915b23b174310cfa0",
+      "generation": "1781114211062240",
+      "size": 2462281728,
+      "sha256": "af734e0efa0e2d4c735ff990cd5805b6d00d57d712db4c0aa7adb186abb1b234"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/ocdbt.process_0/d/7db500ee52c4c39dd26445d1888bdf9e",
+      "generation": "1781114265964012",
+      "size": 2372734976,
+      "sha256": "e540f1fbb7e0a4b9c3436c20354cff29ff0649cf2cb036d42cc17f7f22154949"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/ocdbt.process_0/d/88ca4c49421e9caa9a2c7fb75fdc99b0",
+      "generation": "1781114127380861",
+      "size": 2385293312,
+      "sha256": "1fd0bef586c17bceb423f9fc45f3867005a62a446cdf55f043297ddf5f2525ad"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/ocdbt.process_0/d/89685ba97105bbee23e83fb1ad955334",
+      "generation": "1781107117895798",
+      "size": 948,
+      "sha256": "3fe40ddb395d1559aaf9a9df9259c2a3e20101e0be2b084609bf1fbae8322217"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/ocdbt.process_0/d/adb92e4b867e3d9068e55c61abba4878",
+      "generation": "1781114137861619",
+      "size": 2385649664,
+      "sha256": "3b7a68eba49a27fd39c43633aa1cb7060a4163180cee540efa02bc06a0849890"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/ocdbt.process_0/d/c788e50f5d8dac8f0c519f8045e25ccc",
+      "generation": "1781107672559626",
+      "size": 938831872,
+      "sha256": "1435fc0988e26cb45715dc5f2bc08457d686b9e40728817d4bc62a93cdb89639"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/ocdbt.process_0/d/d1de987cea10359155d1f60b500d838d",
+      "generation": "1781114099485708",
+      "size": 2385563648,
+      "sha256": "9b004a8c1bd886052fe9a6b70d65d2dada2728192a50c0e09dfaebc75adee446"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/ocdbt.process_0/d/db39c80c1fd09cd367cece3a4cce21c5",
+      "generation": "1781114133135755",
+      "size": 2385838080,
+      "sha256": "8668b52af95d7495fbc3a57fbc4e35587b634597f7b573326cfd1e7e72551140"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/ocdbt.process_0/d/ef807e50a7fa096c74b36a4c9f2b2037",
+      "generation": "1781113997808277",
+      "size": 2385424384,
+      "sha256": "280113d8f9aa1f470025b04d8483f056de0bdc4ac0bfe004c077bbdb0d5ef8d1"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/ocdbt.process_0/d/f09d2f357a87ec3bbb5719d46d0a4862",
+      "generation": "1781114287617613",
+      "size": 2372210688,
+      "sha256": "6fd9a37cbe583f167262a4db1ed4a9402a34bcd70d4d88b411f933ca00486d10"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/ocdbt.process_0/d_$folder$",
+      "generation": "1781107112846902",
+      "size": 6,
+      "sha256": "034a0062488256f14c8b14d025ec3988b148938f7f9db94ca0ac73f4b3614d8a"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/ocdbt.process_0/manifest.ocdbt",
+      "generation": "1781107114226801",
+      "size": 337,
+      "sha256": "c8111dd66917303f13d11f4e0dfc8d1485a1e9c0e8d26e846a668b33ea0af076"
+    },
+    {
+      "name": "checkpoints/diffusiongemma-26B-A4B-it/ocdbt.process_0_$folder$",
+      "generation": "1781107110044186",
+      "size": 6,
+      "sha256": "034a0062488256f14c8b14d025ec3988b148938f7f9db94ca0ac73f4b3614d8a"
+    },
+    {
+      "name": "tokenizers/tokenizer_gemma4.model",
+      "generation": "1775150716509039",
+      "size": 4689016,
+      "sha256": "9f318ac4dc02f8580e3f65ff0b37286e7c3d1e5d664737bb2c8ca812b5453162"
+    }
+  ],
+  "sha256": "518abf72853c48679c8c412c928ae2cd09a0b61e284ad0bdbd5b7131fd23c48c"
+}

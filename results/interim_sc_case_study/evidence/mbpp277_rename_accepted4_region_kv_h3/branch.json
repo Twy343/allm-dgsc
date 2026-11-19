@@ -1,0 +1,372 @@
+{
+  "case_id": "mbpp:277",
+  "seed": 100008,
+  "actual_total_steps": 6,
+  "canvases": 1,
+  "steps_per_canvas": "[6]",
+  "stop_reasons": "[\"adaptive\"]",
+  "steps_csv": "mbpp-277_steps.csv",
+  "tokens_csv": "mbpp-277_tokens.csv",
+  "edits": [
+    {
+      "kind": "sc_distribution_mix",
+      "after_step_number": 4,
+      "first_affected_step_number": 5,
+      "batch": 2,
+      "position": 42,
+      "alpha": 1.0,
+      "q": {
+        "2060": 1.0
+      },
+      "requested_vs_stored_probability_l1": 0.0,
+      "probability_note": "Actual float32 softmax of stored logits; dtype rounding is measured",
+      "sc_embedding_delta_l2": 0.0,
+      "sc_embedding_relative_delta": 0.0,
+      "sc_embedding_cosine": 1.0000001192092896
+    },
+    {
+      "kind": "sc_distribution_mix",
+      "after_step_number": 4,
+      "first_affected_step_number": 5,
+      "batch": 2,
+      "position": 43,
+      "alpha": 1.0,
+      "q": {
+        "642": 1.0
+      },
+      "requested_vs_stored_probability_l1": 0.0,
+      "probability_note": "Actual float32 softmax of stored logits; dtype rounding is measured",
+      "sc_embedding_delta_l2": 0.0,
+      "sc_embedding_relative_delta": 0.0,
+      "sc_embedding_cosine": 1.0
+    },
+    {
+      "kind": "sc_distribution_mix",
+      "after_step_number": 4,
+      "first_affected_step_number": 5,
+      "batch": 2,
+      "position": 44,
+      "alpha": 1.0,
+      "q": {
+        "236767": 1.0
+      },
+      "requested_vs_stored_probability_l1": 0.0,
+      "probability_note": "Actual float32 softmax of stored logits; dtype rounding is measured",
+      "sc_embedding_delta_l2": 116.28631591796875,
+      "sc_embedding_relative_delta": 1.177949890442533,
+      "sc_embedding_cosine": 0.28973880410194397
+    },
+    {
+      "kind": "sc_distribution_mix",
+      "after_step_number": 4,
+      "first_affected_step_number": 5,
+      "batch": 2,
+      "position": 45,
+      "alpha": 1.0,
+      "q": {
+        "236787": 1.0
+      },
+      "requested_vs_stored_probability_l1": 0.0,
+      "probability_note": "Actual float32 softmax of stored logits; dtype rounding is measured",
+      "sc_embedding_delta_l2": 0.004096700809895992,
+      "sc_embedding_relative_delta": 4.609060758969129e-05,
+      "sc_embedding_cosine": 1.0
+    },
+    {
+      "kind": "sc_distribution_mix",
+      "after_step_number": 4,
+      "first_affected_step_number": 5,
+      "batch": 2,
+      "position": 46,
+      "alpha": 1.0,
+      "q": {
+        "566": 1.0
+      },
+      "requested_vs_stored_probability_l1": 0.0,
+      "probability_note": "Actual float32 softmax of stored logits; dtype rounding is measured",
+      "sc_embedding_delta_l2": 126.63665771484375,
+      "sc_embedding_relative_delta": 1.2329899991880855,
+      "sc_embedding_cosine": 0.18900847434997559
+    },
+    {
+      "kind": "sc_distribution_mix",
+      "after_step_number": 4,
+      "first_affected_step_number": 5,
+      "batch": 2,
+      "position": 47,
+      "alpha": 1.0,
+      "q": {
+        "573": 1.0
+      },
+      "requested_vs_stored_probability_l1": 0.0,
+      "probability_note": "Actual float32 softmax of stored logits; dtype rounding is measured",
+      "sc_embedding_delta_l2": 1.1469055607449263e-06,
+      "sc_embedding_relative_delta": 1.2512733598089068e-08,
+      "sc_embedding_cosine": 1.0
+    },
+    {
+      "kind": "sc_distribution_mix",
+      "after_step_number": 4,
+      "first_affected_step_number": 5,
+      "batch": 2,
+      "position": 48,
+      "alpha": 1.0,
+      "q": {
+        "620": 1.0
+      },
+      "requested_vs_stored_probability_l1": 0.0,
+      "probability_note": "Actual float32 softmax of stored logits; dtype rounding is measured",
+      "sc_embedding_delta_l2": 120.82929229736328,
+      "sc_embedding_relative_delta": 1.174220880208738,
+      "sc_embedding_cosine": 0.23792476952075958
+    },
+    {
+      "kind": "sc_distribution_mix",
+      "after_step_number": 4,
+      "first_affected_step_number": 5,
+      "batch": 2,
+      "position": 49,
+      "alpha": 1.0,
+      "q": {
+        "236764": 1.0
+      },
+      "requested_vs_stored_probability_l1": 0.0,
+      "probability_note": "Actual float32 softmax of stored logits; dtype rounding is measured",
+      "sc_embedding_delta_l2": 1.1920928955078125e-07,
+      "sc_embedding_relative_delta": 1.482034985320977e-09,
+      "sc_embedding_cosine": 0.9999999403953552
+    },
+    {
+      "kind": "sc_distribution_mix",
+      "after_step_number": 4,
+      "first_affected_step_number": 5,
+      "batch": 2,
+      "position": 50,
+      "alpha": 1.0,
+      "q": {
+        "566": 1.0
+      },
+      "requested_vs_stored_probability_l1": 0.0,
+      "probability_note": "Actual float32 softmax of stored logits; dtype rounding is measured",
+      "sc_embedding_delta_l2": 126.63665771484375,
+      "sc_embedding_relative_delta": 1.2329899991880855,
+      "sc_embedding_cosine": 0.18900853395462036
+    },
+    {
+      "kind": "sc_distribution_mix",
+      "after_step_number": 4,
+      "first_affected_step_number": 5,
+      "batch": 2,
+      "position": 51,
+      "alpha": 1.0,
+      "q": {
+        "528": 1.0
+      },
+      "requested_vs_stored_probability_l1": 0.0,
+      "probability_note": "Actual float32 softmax of stored logits; dtype rounding is measured",
+      "sc_embedding_delta_l2": 0.0,
+      "sc_embedding_relative_delta": 0.0,
+      "sc_embedding_cosine": 0.9999999403953552
+    },
+    {
+      "kind": "sc_distribution_mix",
+      "after_step_number": 4,
+      "first_affected_step_number": 5,
+      "batch": 2,
+      "position": 52,
+      "alpha": 1.0,
+      "q": {
+        "513": 1.0
+      },
+      "requested_vs_stored_probability_l1": 0.0,
+      "probability_note": "Actual float32 softmax of stored logits; dtype rounding is measured",
+      "sc_embedding_delta_l2": 1.9073486328125e-05,
+      "sc_embedding_relative_delta": 2.0320425473945475e-07,
+      "sc_embedding_cosine": 0.9999998807907104
+    },
+    {
+      "kind": "sc_distribution_mix",
+      "after_step_number": 4,
+      "first_affected_step_number": 5,
+      "batch": 2,
+      "position": 53,
+      "alpha": 1.0,
+      "q": {
+        "236761": 1.0
+      },
+      "requested_vs_stored_probability_l1": 0.0,
+      "probability_note": "Actual float32 softmax of stored logits; dtype rounding is measured",
+      "sc_embedding_delta_l2": 1.52587890625e-05,
+      "sc_embedding_relative_delta": 1.9002129758703356e-07,
+      "sc_embedding_cosine": 1.0000001192092896
+    },
+    {
+      "kind": "sc_distribution_mix",
+      "after_step_number": 4,
+      "first_affected_step_number": 5,
+      "batch": 2,
+      "position": 54,
+      "alpha": 1.0,
+      "q": {
+        "7633": 1.0
+      },
+      "requested_vs_stored_probability_l1": 0.0,
+      "probability_note": "Actual float32 softmax of stored logits; dtype rounding is measured",
+      "sc_embedding_delta_l2": 7.62939453125e-06,
+      "sc_embedding_relative_delta": 8.080582803954152e-08,
+      "sc_embedding_cosine": 1.0
+    },
+    {
+      "kind": "sc_distribution_mix",
+      "after_step_number": 4,
+      "first_affected_step_number": 5,
+      "batch": 2,
+      "position": 55,
+      "alpha": 1.0,
+      "q": {
+        "825": 1.0
+      },
+      "requested_vs_stored_probability_l1": 0.0,
+      "probability_note": "Actual float32 softmax of stored logits; dtype rounding is measured",
+      "sc_embedding_delta_l2": 2.9802322387695312e-08,
+      "sc_embedding_relative_delta": 2.8384030390622387e-10,
+      "sc_embedding_cosine": 1.0
+    },
+    {
+      "kind": "sc_distribution_mix",
+      "after_step_number": 4,
+      "first_affected_step_number": 5,
+      "batch": 2,
+      "position": 56,
+      "alpha": 1.0,
+      "q": {
+        "768": 1.0
+      },
+      "requested_vs_stored_probability_l1": 0.0,
+      "probability_note": "Actual float32 softmax of stored logits; dtype rounding is measured",
+      "sc_embedding_delta_l2": 1.52587890625e-05,
+      "sc_embedding_relative_delta": 1.5424595937284826e-07,
+      "sc_embedding_cosine": 1.0000001192092896
+    },
+    {
+      "kind": "sc_distribution_mix",
+      "after_step_number": 4,
+      "first_affected_step_number": 5,
+      "batch": 2,
+      "position": 57,
+      "alpha": 1.0,
+      "q": {
+        "566": 1.0
+      },
+      "requested_vs_stored_probability_l1": 0.0,
+      "probability_note": "Actual float32 softmax of stored logits; dtype rounding is measured",
+      "sc_embedding_delta_l2": 126.63665771484375,
+      "sc_embedding_relative_delta": 1.2329899991880855,
+      "sc_embedding_cosine": 0.18900847434997559
+    },
+    {
+      "kind": "sc_distribution_mix",
+      "after_step_number": 4,
+      "first_affected_step_number": 5,
+      "batch": 2,
+      "position": 58,
+      "alpha": 1.0,
+      "q": {
+        "6867": 1.0
+      },
+      "requested_vs_stored_probability_l1": 0.0,
+      "probability_note": "Actual float32 softmax of stored logits; dtype rounding is measured",
+      "sc_embedding_delta_l2": 0.0,
+      "sc_embedding_relative_delta": 0.0,
+      "sc_embedding_cosine": 1.0
+    },
+    {
+      "kind": "sc_distribution_mix",
+      "after_step_number": 4,
+      "first_affected_step_number": 5,
+      "batch": 2,
+      "position": 59,
+      "alpha": 1.0,
+      "q": {
+        "538": 1.0
+      },
+      "requested_vs_stored_probability_l1": 0.0,
+      "probability_note": "Actual float32 softmax of stored logits; dtype rounding is measured",
+      "sc_embedding_delta_l2": 0.0,
+      "sc_embedding_relative_delta": 0.0,
+      "sc_embedding_cosine": 1.0
+    },
+    {
+      "kind": "sc_distribution_mix",
+      "after_step_number": 4,
+      "first_affected_step_number": 5,
+      "batch": 2,
+      "position": 60,
+      "alpha": 1.0,
+      "q": {
+        "236783": 1.0
+      },
+      "requested_vs_stored_probability_l1": 0.0,
+      "probability_note": "Actual float32 softmax of stored logits; dtype rounding is measured",
+      "sc_embedding_delta_l2": 0.0005611698725260794,
+      "sc_embedding_relative_delta": 5.535319492216191e-06,
+      "sc_embedding_cosine": 1.0000001192092896
+    },
+    {
+      "kind": "sc_region",
+      "after_step_number": 4,
+      "first_affected_step_number": 5,
+      "batch": 2,
+      "position": 42,
+      "length": 19,
+      "target_token_ids": [
+        2060,
+        642,
+        236767,
+        236787,
+        566,
+        573,
+        620,
+        236764,
+        566,
+        528,
+        513,
+        236761,
+        7633,
+        825,
+        768,
+        566,
+        6867,
+        538,
+        236783
+      ],
+      "alpha": 1.0,
+      "aligned_template": true,
+      "canvas_unchanged": true,
+      "per_row_embedding_delta": [
+        0.0,
+        0.0,
+        116.28631591796875,
+        0.004096700809895992,
+        126.63665771484375,
+        1.1469055607449263e-06,
+        120.82929229736328,
+        1.1920928955078125e-07,
+        126.63665771484375,
+        0.0,
+        1.9073486328125e-05,
+        1.52587890625e-05,
+        7.62939453125e-06,
+        2.9802322387695312e-08,
+        1.52587890625e-05,
+        126.63665771484375,
+        0.0,
+        0.0,
+        0.0005611698725260794
+      ]
+    }
+  ],
+  "partial": true,
+  "scope": "canvas0 only",
+  "decoded_canvas": "<|channel>thought\n<channel|>```python\ndef dict_filter(d, n):\n    \"\"\"\n    Filters a dictionary to include only entries with values greater than or equal to n.\n    \"\"\"\n    return {k: v for k, v in d.items() if v >= n}\n\n# Test cases\nif __name__ == \"__main__\":\n    assert dict_filter({'Cierra Vega': 175, 'Alden Cantrell': 180, 'Kierra Gentry': 165, 'Pierre Cox': 190}, 170) == {'Cierra Vega': 175, 'Alden Cantrell': 180, 'Pierre Cox': 190}\n    assert dict_filter({'Cierra Vega': 175, 'Alden Cantrell': 180, 'Kierra Gentry': 165, 'Pierre Cox': 190}, 180) == {'Alden Cantrell': 180, 'Pierre Cox': 190}\n    assert dict_filter({'Cierra Vega': 175, 'Alden Cantrell': 180"
+}

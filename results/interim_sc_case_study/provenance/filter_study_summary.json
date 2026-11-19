@@ -1,0 +1,12 @@
+{
+  "case_id": "mbpp:277",
+  "seed": 100008,
+  "original_batch_size": 4,
+  "export_count": 544,
+  "unique_operation_sequences": 166,
+  "independent_prompts": 1,
+  "independent_seeds": 1,
+  "adaptive_stopped_conditions": 163,
+  "paused_conditions": 3,
+  "note": "Descriptive single-case factorial study; horizons and exact replays are deduplicated. No population inference."
+}

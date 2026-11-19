@@ -1,0 +1,5 @@
+﻿method_id,method,definition,invariant,tested_regions,example,method_not_parameter
+O1_candidate_logit_swap,候选logits交换,选定SC行交换两个候选的shaped logits,行内概率值集合与entropy；其余候选logits,比较符号；值变量及引用；参数/阈值引用；GSM中间数字,mbpp277_swapcontent_accepted4_swap_all3_v_h5,换位置/步数/候选对仍属同一种交换操作
+O2_SC_distribution_edit,SC分布替换或混合,p_new=(1-alpha)*p+alpha*q；alpha=1为替换,每行归一化；与canvas独立控制,单个符号；离散关联字段；连续return表达式；GSM算式模板,mbpp277_rename_early_coherent_sc_v_h5,区域模板和不同alpha是这一操作的范围与幅度设置
+O3_SC_ablation,SC反馈向量清零,指定SC embedding行为0,当前canvas和RNG；未选中的SC行,目标58；全256行；除58外255行；GSM局部邻域,mbpp277_isolation_all_zero_finished,局部/全局/补集是范围；零向量不等于均匀概率
+O4_canvas_substitution,canvas token替换,下一轮forward前替换当前canvas中的token,SC由单独实验设计确定；RNG/step不重置,比较符号；变量和参数引用；注释,mbpp277_collision_accepted4_canvas_h5,SC+canvas是O4与O1/O2的组合，不是新的原子方法

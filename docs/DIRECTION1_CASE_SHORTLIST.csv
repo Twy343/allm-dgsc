@@ -1,0 +1,6 @@
+﻿case_id,task,status,new_replay_original_passed,seed,batch_index,batch_position,reason,followup
+mbpp:277,mbpp,深入干预已完成,True,100008,8,2,主案例：变量协调、算符暂错后恢复、错误绑定、停止与再加噪,复用163个已停止条件，不再全量重跑
+gsm8k:480,gsm8k,已有单点及区域干预,True,0,0,3,算术修复与区域重新加噪，保留未成功语义改写的结果,按既有原batch/seed复用，必要时补少量对照
+mbpp:19,mbpp,选为轻量复核候选 尚未干预,True,100002,2,0,len(nums) != len(set(nums))，有明确真假逻辑,原位置113，!=2843→==1251；原轨迹step6/8，重放后再确认
+mbpp:401,mbpp,选为轻量复核候选 尚未干预,True,100004,4,0,嵌套tuple加法，比较算符替换与一致变量改名,先从本样本新baseline定位a+b及相关引用，不复用277位置
+gsm8k:29,gsm8k,选为轻量复核候选 尚未干预,True,1,1,2,价格问题中明确的中间计算及下游依赖,从已有轨迹定位计算结果，干预前后做语义span对齐

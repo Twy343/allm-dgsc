@@ -1,0 +1,306 @@
+[
+  {
+    "name": "native_MBPP277",
+    "exact": true,
+    "fields": {
+      "before": true,
+      "sampled": true,
+      "accepted": true,
+      "after": true,
+      "entropy": true,
+      "top_ids": true,
+      "top_probs": true,
+      "top_logits": true,
+      "canvas_indices": true,
+      "step_indices": true
+    }
+  },
+  {
+    "name": "return_v_repeat1",
+    "exact": true,
+    "fields": {
+      "before": true,
+      "sampled": true,
+      "accepted": true,
+      "after": true,
+      "entropy": true,
+      "top_ids": true,
+      "top_probs": true,
+      "top_logits": true,
+      "canvas_indices": true,
+      "step_indices": true
+    }
+  },
+  {
+    "name": "return_v_repeat2",
+    "exact": true,
+    "fields": {
+      "before": true,
+      "sampled": true,
+      "accepted": true,
+      "after": true,
+      "entropy": true,
+      "top_ids": true,
+      "top_probs": true,
+      "top_logits": true,
+      "canvas_indices": true,
+      "step_indices": true
+    }
+  },
+  {
+    "name": "accepted4_v_repeat",
+    "exact": true,
+    "fields": {
+      "before": true,
+      "sampled": true,
+      "accepted": true,
+      "after": true,
+      "entropy": true,
+      "top_ids": true,
+      "top_probs": true,
+      "top_logits": true,
+      "canvas_indices": true,
+      "step_indices": true
+    }
+  },
+  {
+    "name": "a075_repeat1",
+    "exact": true,
+    "fields": {
+      "before": true,
+      "sampled": true,
+      "accepted": true,
+      "after": true,
+      "entropy": true,
+      "top_ids": true,
+      "top_probs": true,
+      "top_logits": true,
+      "canvas_indices": true,
+      "step_indices": true
+    }
+  },
+  {
+    "name": "a075_repeat2",
+    "exact": true,
+    "fields": {
+      "before": true,
+      "sampled": true,
+      "accepted": true,
+      "after": true,
+      "entropy": true,
+      "top_ids": true,
+      "top_probs": true,
+      "top_logits": true,
+      "canvas_indices": true,
+      "step_indices": true
+    }
+  },
+  {
+    "name": "accepted4_joint_repeat1",
+    "exact": true,
+    "fields": {
+      "before": true,
+      "sampled": true,
+      "accepted": true,
+      "after": true,
+      "entropy": true,
+      "top_ids": true,
+      "top_probs": true,
+      "top_logits": true,
+      "canvas_indices": true,
+      "step_indices": true
+    }
+  },
+  {
+    "name": "accepted4_joint_repeat2",
+    "exact": true,
+    "fields": {
+      "before": true,
+      "sampled": true,
+      "accepted": true,
+      "after": true,
+      "entropy": true,
+      "top_ids": true,
+      "top_probs": true,
+      "top_logits": true,
+      "canvas_indices": true,
+      "step_indices": true
+    }
+  },
+  {
+    "name": "accepted4_sc_repeat",
+    "exact": true,
+    "fields": {
+      "before": true,
+      "sampled": true,
+      "accepted": true,
+      "after": true,
+      "entropy": true,
+      "top_ids": true,
+      "top_probs": true,
+      "top_logits": true,
+      "canvas_indices": true,
+      "step_indices": true
+    }
+  },
+  {
+    "name": "parameter_joint_repeat1",
+    "exact": true,
+    "fields": {
+      "before": true,
+      "sampled": true,
+      "accepted": true,
+      "after": true,
+      "entropy": true,
+      "top_ids": true,
+      "top_probs": true,
+      "top_logits": true,
+      "canvas_indices": true,
+      "step_indices": true
+    }
+  },
+  {
+    "name": "parameter_joint_repeat2",
+    "exact": true,
+    "fields": {
+      "before": true,
+      "sampled": true,
+      "accepted": true,
+      "after": true,
+      "entropy": true,
+      "top_ids": true,
+      "top_probs": true,
+      "top_logits": true,
+      "canvas_indices": true,
+      "step_indices": true
+    }
+  },
+  {
+    "name": "rhs_joint_repeat1",
+    "exact": true,
+    "fields": {
+      "before": true,
+      "sampled": true,
+      "accepted": true,
+      "after": true,
+      "entropy": true,
+      "top_ids": true,
+      "top_probs": true,
+      "top_logits": true,
+      "canvas_indices": true,
+      "step_indices": true
+    }
+  },
+  {
+    "name": "rhs_joint_repeat2",
+    "exact": true,
+    "fields": {
+      "before": true,
+      "sampled": true,
+      "accepted": true,
+      "after": true,
+      "entropy": true,
+      "top_ids": true,
+      "top_probs": true,
+      "top_logits": true,
+      "canvas_indices": true,
+      "step_indices": true
+    }
+  },
+  {
+    "name": "operator_le_joint_repeat1",
+    "exact": true,
+    "fields": {
+      "before": true,
+      "sampled": true,
+      "accepted": true,
+      "after": true,
+      "entropy": true,
+      "top_ids": true,
+      "top_probs": true,
+      "top_logits": true,
+      "canvas_indices": true,
+      "step_indices": true
+    }
+  },
+  {
+    "name": "operator_le_joint_repeat2",
+    "exact": true,
+    "fields": {
+      "before": true,
+      "sampled": true,
+      "accepted": true,
+      "after": true,
+      "entropy": true,
+      "top_ids": true,
+      "top_probs": true,
+      "top_logits": true,
+      "canvas_indices": true,
+      "step_indices": true
+    }
+  },
+  {
+    "name": "operator_eq_joint_repeat1",
+    "exact": true,
+    "fields": {
+      "before": true,
+      "sampled": true,
+      "accepted": true,
+      "after": true,
+      "entropy": true,
+      "top_ids": true,
+      "top_probs": true,
+      "top_logits": true,
+      "canvas_indices": true,
+      "step_indices": true
+    }
+  },
+  {
+    "name": "operator_eq_joint_repeat2",
+    "exact": true,
+    "fields": {
+      "before": true,
+      "sampled": true,
+      "accepted": true,
+      "after": true,
+      "entropy": true,
+      "top_ids": true,
+      "top_probs": true,
+      "top_logits": true,
+      "canvas_indices": true,
+      "step_indices": true
+    }
+  },
+  {
+    "name": "operator_gt_joint_repeat1",
+    "exact": true,
+    "fields": {
+      "before": true,
+      "sampled": true,
+      "accepted": true,
+      "after": true,
+      "entropy": true,
+      "top_ids": true,
+      "top_probs": true,
+      "top_logits": true,
+      "canvas_indices": true,
+      "step_indices": true
+    }
+  },
+  {
+    "name": "operator_gt_joint_repeat2",
+    "exact": true,
+    "fields": {
+      "before": true,
+      "sampled": true,
+      "accepted": true,
+      "after": true,
+      "entropy": true,
+      "top_ids": true,
+      "top_probs": true,
+      "top_logits": true,
+      "canvas_indices": true,
+      "step_indices": true
+    }
+  }
+]

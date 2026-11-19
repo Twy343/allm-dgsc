@@ -1,0 +1,9 @@
+{
+  "jax": "0.11.2",
+  "jaxlib": "0.11.2",
+  "flax": "0.12.10",
+  "numpy": "2.5.4",
+  "orbax-checkpoint": "0.12.7",
+  "sentencepiece": "0.2.2",
+  "matplotlib": "3.11.2"
+}

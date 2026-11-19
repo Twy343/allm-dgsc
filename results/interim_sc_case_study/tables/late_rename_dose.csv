@@ -1,0 +1,12 @@
+﻿alpha,branch,after_step,sites,focus_stop_step,adaptive_stop,step5_mean_entropy,step5_accepted,step5_stop,step5_argmax_matches_before,stop_unaccepted_positions,tests_passed,tests_total,function_only_status
+0,mbpp277_rename_accepted4_baseline_h3,4,"46,50,57",5,True,1.750040792103391e-05,256,True,True,[],3,3,tested
+0.25,mbpp277_control_accepted4_v_a025_h5,4,"46,50,57",5,True,3.262245445512235e-05,256,True,True,[],3,3,tested
+0.5,mbpp277_control_accepted4_v_a050_h5,4,"46,50,57",5,True,0.0006105726351961493,256,True,True,[],3,3,tested
+0.6,mbpp277_stopedge_a060_h5,4,"46,50,57",5,True,0.00031871418468654156,256,True,True,[],3,3,tested
+0.65,mbpp277_stopedge_a065_h5,4,"46,50,57",5,True,0.00026891365996561944,256,True,True,[],3,3,tested
+0.7,mbpp277_stopedge_a070_h5,4,"46,50,57",5,True,0.001458744052797556,255,True,True,[57],0,3,"syntax_failure: invalid syntax (<unknown>, line 5)"
+0.75,mbpp277_control_accepted4_v_a075_h5,4,"46,50,57",5,True,0.004869217984378338,254,True,True,"[46, 57]",0,3,"syntax_failure: invalid syntax (<unknown>, line 5)"
+0.8,mbpp277_stopedge_a080_h5,4,"46,50,57",8,True,0.006826644763350487,254,False,False,[],3,3,tested
+0.85,mbpp277_stopedge_a085_h5,4,"46,50,57",7,True,0.0008421292877756059,255,False,False,[],3,3,tested
+0.9,mbpp277_stopedge_a090_h5,4,"46,50,57",6,True,0.00013242608110886067,256,False,False,[],3,3,tested
+1,mbpp277_rename_accepted4_coherent_sc_v_h3,4,"46,50,57",6,True,2.4213835786213167e-05,256,False,False,[],3,3,tested

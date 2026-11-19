@@ -1,0 +1,63 @@
+{
+  "case_id": "mbpp:277",
+  "seed": 100008,
+  "actual_total_steps": 5,
+  "canvases": 1,
+  "steps_per_canvas": "[5]",
+  "stop_reasons": "[\"adaptive\"]",
+  "steps_csv": "mbpp-277_steps.csv",
+  "tokens_csv": "mbpp-277_tokens.csv",
+  "edits": [
+    {
+      "kind": "sc_distribution_mix",
+      "after_step_number": 4,
+      "first_affected_step_number": 5,
+      "batch": 2,
+      "position": 46,
+      "alpha": 0.65,
+      "q": {
+        "566": 1.0
+      },
+      "requested_vs_stored_probability_l1": 0.001737070269882679,
+      "probability_note": "Actual float32 softmax of stored logits; dtype rounding is measured",
+      "sc_embedding_delta_l2": 82.11156463623047,
+      "sc_embedding_relative_delta": 0.7994741794444171,
+      "sc_embedding_cosine": 0.6166327595710754
+    },
+    {
+      "kind": "sc_distribution_mix",
+      "after_step_number": 4,
+      "first_affected_step_number": 5,
+      "batch": 2,
+      "position": 50,
+      "alpha": 0.65,
+      "q": {
+        "566": 1.0
+      },
+      "requested_vs_stored_probability_l1": 0.0017482880502939224,
+      "probability_note": "Actual float32 softmax of stored logits; dtype rounding is measured",
+      "sc_embedding_delta_l2": 82.11129760742188,
+      "sc_embedding_relative_delta": 0.7994715795349089,
+      "sc_embedding_cosine": 0.6166357398033142
+    },
+    {
+      "kind": "sc_distribution_mix",
+      "after_step_number": 4,
+      "first_affected_step_number": 5,
+      "batch": 2,
+      "position": 57,
+      "alpha": 0.65,
+      "q": {
+        "566": 1.0
+      },
+      "requested_vs_stored_probability_l1": 0.0017418217612430453,
+      "probability_note": "Actual float32 softmax of stored logits; dtype rounding is measured",
+      "sc_embedding_delta_l2": 82.11148071289062,
+      "sc_embedding_relative_delta": 0.7994733623300003,
+      "sc_embedding_cosine": 0.6166336536407471
+    }
+  ],
+  "partial": true,
+  "scope": "canvas0 only",
+  "decoded_canvas": "<|channel>thought\n<channel|>```python\ndef dict_filter(d, n):\n    \"\"\"\n    Filters a dictionary to include only entries with values greater than or equal to n.\n    \"\"\"\n    return {key: value for key, value in d.items() if value >= n}\n\n# Test cases\nif __name__ == \"__main__\":\n    assert dict_filter({'Cierra Vega': 175, 'Alden Cantrell': 180, 'Kierra Gentry': 165, 'Pierre Cox': 190}, 170) == {'Cierra Vega': 175, 'Alden Cantrell': 180, 'Pierre Cox': 190}\n    assert dict_filter({'Cierra Vega': 175, 'Alden Cantrell': 180, 'Kierra Gentry': 165, 'Pierre Cox': 190}, 180) == {'Alden Cantrell': 180, 'Pierre Cox': 190}\n    assert dict_filter({'Cierra Vega': 175, 'Alden Cantrell': 180"
+}

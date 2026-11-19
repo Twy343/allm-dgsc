@@ -1,0 +1,80 @@
+{
+  "case_id": "mbpp:277",
+  "original_batch": [
+    {
+      "id": "mbpp:133",
+      "source_index": 74,
+      "prompt": "Write a complete Python solution to the following task. Return the solution in a single Python code block.\nWrite a function to calculate the sum of the negative numbers of a given list of numbers.\nThe solution must pass:\nassert sum_negativenum([2, 4, -6, -9, 11, -12, 14, -5, 17])==-32\nassert sum_negativenum([10,15,-14,13,-18,12,-20])==-52\nassert sum_negativenum([19, -65, 57, 39, 152,-639, 121, 44, 90, -190])==-894",
+      "reference": "def sum_negativenum(nums):\n  sum_negativenum = list(filter(lambda nums:nums<0,nums))\n  return sum(sum_negativenum)",
+      "tests": [
+        "assert sum_negativenum([2, 4, -6, -9, 11, -12, 14, -5, 17])==-32",
+        "assert sum_negativenum([10,15,-14,13,-18,12,-20])==-52",
+        "assert sum_negativenum([19, -65, 57, 39, 152,-639, 121, 44, 90, -190])==-894"
+      ],
+      "test_imports": []
+    },
+    {
+      "id": "mbpp:464",
+      "source_index": 244,
+      "prompt": "Write a complete Python solution to the following task. Return the solution in a single Python code block.\nWrite a function to check if all values are same in a dictionary.\nThe solution must pass:\nassert check_value({'Cierra Vega': 12, 'Alden Cantrell': 12, 'Kierra Gentry': 12, 'Pierre Cox': 12},10)==False\nassert check_value({'Cierra Vega': 12, 'Alden Cantrell': 12, 'Kierra Gentry': 12, 'Pierre Cox': 12},12)==True\nassert check_value({'Cierra Vega': 12, 'Alden Cantrell': 12, 'Kierra Gentry': 12, 'Pierre Cox': 12},5)==False",
+      "reference": "def check_value(dict, n):\n    result = all(x == n for x in dict.values()) \n    return result",
+      "tests": [
+        "assert check_value({'Cierra Vega': 12, 'Alden Cantrell': 12, 'Kierra Gentry': 12, 'Pierre Cox': 12},10)==False",
+        "assert check_value({'Cierra Vega': 12, 'Alden Cantrell': 12, 'Kierra Gentry': 12, 'Pierre Cox': 12},12)==True",
+        "assert check_value({'Cierra Vega': 12, 'Alden Cantrell': 12, 'Kierra Gentry': 12, 'Pierre Cox': 12},5)==False"
+      ],
+      "test_imports": []
+    },
+    {
+      "id": "mbpp:277",
+      "source_index": 142,
+      "prompt": "Write a complete Python solution to the following task. Return the solution in a single Python code block.\nWrite a function that takes in a dictionary and integer n and filters the dictionary to only include entries with values greater than or equal to n.\nThe solution must pass:\nassert dict_filter({'Cierra Vega': 175, 'Alden Cantrell': 180, 'Kierra Gentry': 165, 'Pierre Cox': 190},170)=={'Cierra Vega': 175, 'Alden Cantrell': 180, 'Pierre Cox': 190}\nassert dict_filter({'Cierra Vega': 175, 'Alden Cantrell': 180, 'Kierra Gentry': 165, 'Pierre Cox': 190},180)=={ 'Alden Cantrell': 180, 'Pierre Cox': 190}\nassert dict_filter({'Cierra Vega': 175, 'Alden Cantrell': 180, 'Kierra Gentry': 165, 'Pierre Cox': 190},190)=={ 'Pierre Cox': 190}",
+      "reference": "def dict_filter(dict,n):\n result = {key:value for (key, value) in dict.items() if value >=n}\n return result",
+      "tests": [
+        "assert dict_filter({'Cierra Vega': 175, 'Alden Cantrell': 180, 'Kierra Gentry': 165, 'Pierre Cox': 190},170)=={'Cierra Vega': 175, 'Alden Cantrell': 180, 'Pierre Cox': 190}",
+        "assert dict_filter({'Cierra Vega': 175, 'Alden Cantrell': 180, 'Kierra Gentry': 165, 'Pierre Cox': 190},180)=={ 'Alden Cantrell': 180, 'Pierre Cox': 190}",
+        "assert dict_filter({'Cierra Vega': 175, 'Alden Cantrell': 180, 'Kierra Gentry': 165, 'Pierre Cox': 190},190)=={ 'Pierre Cox': 190}"
+      ],
+      "test_imports": []
+    },
+    {
+      "id": "mbpp:59",
+      "source_index": 11,
+      "prompt": "Write a complete Python solution to the following task. Return the solution in a single Python code block.\nWrite a function to find the nth octagonal number.\nThe solution must pass:\nassert is_octagonal(5) == 65\nassert is_octagonal(10) == 280\nassert is_octagonal(15) == 645",
+      "reference": "def is_octagonal(n): \n\treturn 3 * n * n - 2 * n ",
+      "tests": [
+        "assert is_octagonal(5) == 65",
+        "assert is_octagonal(10) == 280",
+        "assert is_octagonal(15) == 645"
+      ],
+      "test_imports": []
+    }
+  ],
+  "focus": 2,
+  "batch_index": 8,
+  "seed": 100008,
+  "dataset": {
+    "task": "mbpp",
+    "stage": "configured_test",
+    "split": "test",
+    "dataset_dir": "/insomnia001/depts/edu/users/yc4953/datasets/mbpp/sanitized",
+    "dataset_fingerprint": "6754be74f87954a4",
+    "selection_seed": 4953,
+    "sha256": "7dc116ee4a38e598fd6441f9a2e8bf22b106fe9103d3e59efb3c1b431873a952"
+  },
+  "input_run_sha256": "63cbe173fb0e823007610cf49b92ca51a41d9b2b151e92b9c31493e536df791f",
+  "checkpoint_sha256": "518abf72853c48679c8c412c928ae2cd09a0b61e284ad0bdbd5b7131fd23c48c",
+  "source_sha256": "75687f81cb0fb6d3ee96ceb5617d12cfb11a315df3ece3b7e5a12b3ba3b8d3d6",
+  "jax": "0.11.2",
+  "device": [
+    "NVIDIA RTX PRO 6000 Blackwell Server Edition"
+  ],
+  "original_trace_sha256": "e94453bf54dcc7fa2f13cfefd22668c14173e648ec331b4ed58e93bb066a64cb",
+  "canvas_length": 256,
+  "max_denoising_steps": 48,
+  "entropy_bound": 0.1,
+  "early_stop": "upstream ChainedEarlyStop(TokenStabilityEarlyStop,EntropyEarlyStop(.005)); unchanged",
+  "scope": "One prompt, one original batch/seed; canvas0. Extracted function-only public tests; not whole-response benchmark scoring.",
+  "alpha": "Distribution mixture, distinct from post-MLP branch amplitude beta.",
+  "saved_logits": "All positions top16 + entropy/masks; NOT full vocabulary histories. Full latest logits resident only."
+}

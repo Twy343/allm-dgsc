@@ -1,0 +1,8 @@
+{
+  "case_id": "mbpp:277",
+  "checked_exports": 544,
+  "selected_tokens_match_actual_categorical_draws": true,
+  "canvas_continuity_with_logged_edits": true,
+  "preintervention_native_prefix_exact": true,
+  "note": "Top16/full-position compact trajectories; no claim of all-vocabulary archival."
+}

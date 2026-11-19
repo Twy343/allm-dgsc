@@ -1,0 +1,11 @@
+{
+  "expected_exports": 565,
+  "actual_exports": 565,
+  "missing_exports": [],
+  "command_errors": 0,
+  "exports_by_case": {
+    "mbpp:277": 544,
+    "gsm8k:233": 21
+  },
+  "model_was_not_terminated_for_snapshot": true
+}

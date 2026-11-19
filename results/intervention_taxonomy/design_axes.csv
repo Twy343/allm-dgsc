@@ -1,0 +1,8 @@
+﻿axis,levels,meaning,new_method
+channel,SC_only/canvas_only/joint,干预通道组合,False
+content_relation,原内容/等价改名/逻辑错误/一致修复/无关内容,修改内容与上下文的关系,False
+scope,单点/关联位置集合/连续区域/全局/补集,支持集合,False
+timing,after step2/3/4；接受前后,目标字段实际状态,False
+magnitude,alpha/实际概率移动量/embedding delta,幅度，不是方法数,False
+duration,一次/连续多轮,时间覆盖，不是新操作,False
+observation,后续1/3/5步或自然停止,读出时点，不是独立重复,False

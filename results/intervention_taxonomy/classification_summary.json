@@ -1,0 +1,22 @@
+{
+  "study": "MBPP277 fixed prompt, original batch4, seed100008",
+  "input_csv_sha256": "fc762ce1945cde14a896cca6af99387f989b5fd9ceb783b8f16385de650976de",
+  "raw_archive_sha256": "1820393c9b8bc04f46fe274c1c0eb3db193c59e3ba0a68d69a2f46e07fe1efcc",
+  "primitive_operator_families": 4,
+  "completed_perturbation_configurations": 162,
+  "completed_baselines": 1,
+  "partial_prefix_sequences": 3,
+  "unique_operation_sequences": 166,
+  "completed_configurations_by_channel": {
+    "SC_only": 90,
+    "joint": 51,
+    "canvas_only": 21
+  },
+  "primitive_coverage_counts_overlapping": {
+    "O2_SC_distribution_edit": 119,
+    "O4_canvas_substitution": 72,
+    "O1_candidate_logit_swap": 19,
+    "O3_SC_ablation": 5
+  },
+  "note": "Coverage counts overlap for combined operators. Positions, timing, strength, scope and duration are factors, not new methods."
+}
