@@ -10,9 +10,18 @@
 当前Console沿用集群allm环境和已有权重，入口为
 `python -m exp_code.semantic_intervention.debug_console --verify --idle-seconds 0`。
 需要在已分配的GPU上运行；启动前检查现有作业，不要重复申请或启动。
-入口目前读取`outputs/sc-benchmark64-deferred-v2/run.json`来取得样本计划、原batch/seed和
-checkpoint路径；该运行文件及权重不随Git clone分发。使用同一服务器已有文件即可，
-独立部署则需要显式提供等价运行配置并核对prompt/batch/seed与checkpoint。
+入口优先读取已有`outputs/sc-benchmark64-deferred-v2/run.json`；该运行文件不随Git分发。
+新clone没有它时，自动使用已提交的`configs/debugger_run.json`，其中只含两个示例batch，
+包括GSM480与MBPP277，并保留原batch编号与seed。模型权重仍需单独准备。
+
+明确指定配置和自己的权重路径（在已配置allm环境、已取得GPU的仓库根目录运行）：
+
+```bash
+python -m exp_code.semantic_intervention.debug_console --run-config configs/debugger_run.json --checkpoint /your/path/diffusiongemma-26B-A4B-it --verify --idle-seconds 0 --output outputs/position-session-01
+```
+
+如果使用原服务器的现有模型路径，可以省略`--checkpoint`。配置不是结果文件或GPU断点；
+GSM480 seed=0、focus=3；MBPP277 seed=100008、focus=2。不要重新排序batch成员。
 不要把CSV里的top16候选当作可恢复的完整GPU断点。
 
 第一方向的方法分类见 `../../docs/INTERVENTION_TAXONOMY.md`。位置/区域作为已有内容操作

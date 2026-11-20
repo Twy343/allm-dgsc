@@ -11,6 +11,7 @@ from pathlib import Path
 import shlex
 import signal
 import time
+from exp_code.common.debug_config import resolve_batch
 
 
 def prepare_canvas(chat,prompts,seed):
@@ -202,16 +203,12 @@ class Console(cmd.Cmd):
   def do_load(self,arg):
     import dialog
     case_id=arg.strip()
-    task=case_id.split(':')[0];cases=self.previous['plans'][task]['cases']
-    at=next((i for i,c in enumerate(cases) if c['id']==case_id),None)
-    if at is None:raise ValueError('Unknown case ID')
     # Original batch4 shape and RNG, including the other batch members.
-    start=(at//4)*4;batch=cases[start:start+4]
-    self.seed=self.previous['seed']+list(self.previous['plans']).index(task)*100000+start//4
+    batch,focus,self.seed=resolve_batch(self.previous,case_id)
     prompts=[dialog.Conversation(dialog.User(c['prompt'])).as_text(format=self.chat.tokenizer.FORMAT) for c in batch]
     self.engine=None;self.initial=None;self.break_after=None;gc.collect()
     self.engine,self.initial=prepare_canvas(self.chat,prompts,self.seed)
-    self.focus=at%4;self.case_id=case_id;self.engine.save('start')
+    self.focus=focus;self.case_id=case_id;self.engine.save('start')
     print('PREFILLED',case_id,'focus',self.focus,'seed',self.seed,'canvas0 only',flush=True)
 
   def do_until(self,arg):
@@ -314,6 +311,9 @@ def main():
   from exp_code.baselines.run import source_identity
   from exp_code.common.sc_sampler import SCSampler
   parser=argparse.ArgumentParser(description=__doc__)
+  parser.add_argument('--run-config',type=Path,
+      help='Run plan JSON; defaults to existing benchmark run.json, otherwise configs/debugger_run.json')
+  parser.add_argument('--checkpoint',type=Path,help='Override the local checkpoint directory')
   parser.add_argument('--output',type=Path,default=Path('outputs/sc-debug-session'))
   parser.add_argument('--idle-seconds',type=int,default=0,
       help='Optional idle timeout; 0 retains the process for the allocated research block')
@@ -321,13 +321,19 @@ def main():
   parser.add_argument('--explore',action='store_true',help='After verification, run a bounded committed-site causal probe before the console')
   args=parser.parse_args()
   if args.explore and not args.verify:parser.error('--explore requires --verify')
-  previous=json.loads(Path('outputs/sc-benchmark64-deferred-v2/run.json').read_text())
+  run_config=args.run_config
+  if run_config is None:
+    legacy=Path('outputs/sc-benchmark64-deferred-v2/run.json')
+    run_config=legacy if legacy.exists() else Path('configs/debugger_run.json')
+  previous=json.loads(run_config.read_text(encoding='utf-8'))
+  if args.checkpoint is not None:previous['checkpoint']=str(args.checkpoint)
   args.output.mkdir(parents=True,exist_ok=True)
   if (args.output/'session.json').exists():raise ValueError('Session output already exists; use a new directory')
   (args.output/'session.json').write_text(json.dumps(dict(checkpoint_sha256=previous['checkpoint_sha256'],
       source_sha256=source_identity(),device_kind=[d.device_kind for d in jax.devices()],
       jax=jax.__version__,python=sys.version,scope='canvas0, original batch4 and RNG',
-      idle_seconds=args.idle_seconds,snapshots='GPU memory only; expire with process'),indent=2)+'\n',encoding='utf-8')
+      idle_seconds=args.idle_seconds,run_config=str(run_config),checkpoint=previous['checkpoint'],
+      snapshots='GPU memory only; expire with process'),indent=2)+'\n',encoding='utf-8')
   print('SINGLE_WEIGHT_LOAD_START',flush=True)
   model,params,tokenizer,_=load_model(Path(previous['checkpoint']),1)
   chat=SCSampler(model=model,params=params,tokenizer=tokenizer,cache_length=previous['cache_length'],
